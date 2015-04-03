@@ -111,7 +111,7 @@ class Collection extends \ArrayIterator
     /**
      * Order collection elements by some property
      *
-     * @param string $name
+     * @param string $element
      * @param string $order desc|asc
      * @access public
      * @return void
