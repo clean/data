@@ -376,10 +376,9 @@ class Collection extends \ArrayIterator
     public function bindCollection(Collection $collection, $targetKey, $propertyName)
     {
         $reflection = new \ReflectionClass($collection);
-        $collectionName = $reflection->getName();
         foreach ($this as $entity) {
             if (!isset($entity->$propertyName)) {
-                $entity->$propertyName = new $collectionName;
+                $entity->$propertyName = new $reflection->name;
             }
 
             if ($entity->$targetKey !== null && isset($collection[$entity->$targetKey])) {
