@@ -134,7 +134,7 @@ class Collection extends \ArrayIterator
                     $valueA = $a[$element];
                     $valueB = $b[$element];
                 } else {
-                    throw new InvalidArgumentException(sprintf("Collection can't be sorted it contains invalid data type: %s", gettype($a)));
+                    throw new \InvalidArgumentException(sprintf("Collection can't be sorted it contains invalid data type: %s", gettype($a)));
                 }
                 return  ($valueA > $valueB ? 1*$m : ($valueA < $valueB ? -1*$m : 0));
             }
@@ -263,7 +263,7 @@ class Collection extends \ArrayIterator
                     $collection[$key] = $entity;
                 }
             } else {
-                throw new InvalidArgumentException("Invalid operator used: '$operator'");
+                throw new \InvalidArgumentException("Invalid operator used: '$operator'");
             }
         }
         return $collection;
