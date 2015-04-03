@@ -82,7 +82,7 @@ class Collection extends \ArrayIterator
      *
      * @param array $data
      * @access public
-     * @return this
+     * @return Collection
      */
     public function appendArray($data)
     {
@@ -114,7 +114,7 @@ class Collection extends \ArrayIterator
      * @param string $element
      * @param string $order desc|asc
      * @access public
-     * @return void
+     * @return Collection
      */
     public function orderBy($element, $order = 'asc')
     {
@@ -399,6 +399,9 @@ class Collection extends \ArrayIterator
         return $keys;
     }
 
+    /**
+     * @param double $size
+     */
     public function chunk($size)
     {
         $class = get_called_class();
@@ -441,6 +444,10 @@ class Collection extends \ArrayIterator
         return $collection;
     }
 
+    /**
+     * @param integer $offset
+     * @param integer $length
+     */
     public function slice($offset, $length = null)
     {
         $keys = $this->getKeys();
