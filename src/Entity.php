@@ -1,7 +1,7 @@
 <?php
 namespace Clean\Data;
 
-abstract class Entity
+class Entity
 {
     final public function __construct(array $data = [ ])
     {
