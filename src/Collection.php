@@ -5,7 +5,7 @@ class Collection extends \ArrayIterator
 {
     public function __construct($data = null)
     {
-        parent::__construct([ ]);
+        parent::__construct([]);
         if ($data) {
             $this->appendArray($data);
         }
@@ -64,9 +64,9 @@ class Collection extends \ArrayIterator
             }
 
             if (is_scalar($value)) {
-                $ids[ $value ] = $value;
+                $ids[$value] = $value;
             } else {
-                $ids[ ] = $value;
+                $ids[] = $value;
             }
         }
 
@@ -104,7 +104,7 @@ class Collection extends \ArrayIterator
     public function getRandom()
     {
         $random_key = array_rand($this->getArrayCopy());
-        return $this[ $random_key ];
+        return $this[$random_key];
     }
 
 
@@ -131,8 +131,8 @@ class Collection extends \ArrayIterator
                         $valueB = $b->$element;
                     }
                 } else if (is_array($a) && is_array($b)) {
-                    $valueA = $a[ $element ];
-                    $valueB = $b[ $element ];
+                    $valueA = $a[$element];
+                    $valueB = $b[$element];
                 } else {
                     throw new \InvalidArgumentException(sprintf("Collection can't be sorted it contains invalid data type: %s", gettype($a)));
                 }
@@ -221,10 +221,10 @@ class Collection extends \ArrayIterator
                 $value = $callback($value);
             }
 
-            if (!isset($collection[ $value ])) {
-                $collection[ $value ] = new $class(array($entity));
+            if (!isset($collection[$value])) {
+                $collection[$value] = new $class(array($entity));
             } else {
-                $collection[ $value ]->append($entity);
+                $collection[$value]->append($entity);
             }
         }
         return $collection;
@@ -240,27 +240,27 @@ class Collection extends \ArrayIterator
         foreach ($this as $key => $entity) {
             if ($operator == '=' || $operator == '~') {
                 if (in_array($entity->$field, $arrayValue, ($operator == '=') ? true : false)) {
-                    $collection[ $key ] = $entity;
+                    $collection[$key] = $entity;
                 }
             } else if ($operator == '!=') {
                 if (!in_array($entity->$field, $arrayValue, true)) {
-                    $collection[ $key ] = $entity;
+                    $collection[$key] = $entity;
                 }
             } else if ($operator == '>') {
                 if ($entity->$field > $value) {
-                    $collection[ $key ] = $entity;
+                    $collection[$key] = $entity;
                 }
             } else if ($operator == '>=') {
                 if ($entity->$field >= $value) {
-                    $collection[ $key ] = $entity;
+                    $collection[$key] = $entity;
                 }
             } else if ($operator == '<') {
                 if ($entity->$field < $value) {
-                    $collection[ $key ] = $entity;
+                    $collection[$key] = $entity;
                 }
             } else if ($operator == '<=') {
                 if ($entity->$field <= $value) {
-                    $collection[ $key ] = $entity;
+                    $collection[$key] = $entity;
                 }
             } else {
                 throw new \InvalidArgumentException("Invalid operator used: '$operator'");
@@ -276,7 +276,7 @@ class Collection extends \ArrayIterator
 
         foreach ($this as $key => $entity) {
             if ($callback($entity)) {
-                $collection[ $key ] = $entity;
+                $collection[$key] = $entity;
             }
         }
 
@@ -367,7 +367,7 @@ class Collection extends \ArrayIterator
         $collection = new $class;
         foreach ($this as $key => $entity) {
             if (preg_match($regex, $entity->$field)) {
-                $collection[ $key ] = $entity;
+                $collection[$key] = $entity;
             }
         }
         return $collection;
@@ -381,8 +381,8 @@ class Collection extends \ArrayIterator
                 $entity->$propertyName = new $reflection->name;
             }
 
-            if ($entity->$targetKey !== null && isset($collection[ $entity->$targetKey ])) {
-                $entity->$propertyName->appendArray($collection[ $entity->$targetKey ]);
+            if ($entity->$targetKey !== null && isset($collection[$entity->$targetKey])) {
+                $entity->$propertyName->appendArray($collection[$entity->$targetKey]);
             }
         }
         return $this;
@@ -392,7 +392,7 @@ class Collection extends \ArrayIterator
     {
         $keys = array();
         foreach ($this as $key => $entity) {
-            $keys[ ] = $key;
+            $keys[] = $key;
         }
 
         return $keys;
@@ -407,10 +407,10 @@ class Collection extends \ArrayIterator
         $collection = new $class;
 
         foreach (array_chunk($this->getKeys(), $size) as $chunkIndex => $keys) {
-            $collection[ $chunkIndex ] = new $class;
+            $collection[$chunkIndex] = new $class;
 
             foreach ($keys as $key) {
-                $collection[ $chunkIndex ]->append($this[ $key ]);
+                $collection[$chunkIndex]->append($this[$key]);
             }
         }
 
@@ -421,7 +421,7 @@ class Collection extends \ArrayIterator
     {
         $slice = $this->slice(0, 1);
         $offset = $slice->getKeys();
-        $this->offsetUnset($offset[ 0 ]);
+        $this->offsetUnset($offset[0]);
         return $slice->first();
     }
 
@@ -434,10 +434,10 @@ class Collection extends \ArrayIterator
         $class = get_called_class();
         $collection = new $class;
 
-        $collection[ ] = $element;
+        $collection[] = $element;
 
         foreach ($this as $entity) {
-            $collection[ ] = $entity;
+            $collection[] = $entity;
         }
 
         return $collection;
@@ -458,7 +458,7 @@ class Collection extends \ArrayIterator
 
         foreach ($this as $key => $entity) {
             if (in_array($key, $keys)) {
-                $collection[ $key ] = $entity;
+                $collection[$key] = $entity;
             }
         }
 
@@ -488,7 +488,7 @@ class Collection extends \ArrayIterator
         $result = array();
 
         foreach ($this as $entity) {
-            $result[ ] = $entity->toArray();
+            $result[] = $entity->toArray();
         }
 
         return $result;
@@ -505,7 +505,7 @@ class Collection extends \ArrayIterator
 
         $index = 0;
         foreach ($data as $value) {
-            $this[ $index++ ] = $value;
+            $this[$index++] = $value;
         }
         $this->rewind();
 
@@ -519,8 +519,8 @@ class Collection extends \ArrayIterator
 
         foreach ($this as $key => $entity) {
             if (!in_array($entity->$property, $uniques)) {
-                $collection[ $key ] = $entity;
-                $uniques[ ] = $entity->$property;
+                $collection[$key] = $entity;
+                $uniques[] = $entity->$property;
             }
         }
 
@@ -532,7 +532,7 @@ class Collection extends \ArrayIterator
         $positions = array_flip($this->getKeys());
         $this->uksort(
             function($a, $b) use ($positions) {
-                return ($positions[ $a ] < $positions[ $b ] ? 1 : -1);
+                return ($positions[$a] < $positions[$b] ? 1 : -1);
             }
         );
 
@@ -545,7 +545,7 @@ class Collection extends \ArrayIterator
         $collection = new $class;
 
         foreach ($this as $key => $entity) {
-            $collection[ $key ] = $callback($entity);
+            $collection[$key] = $callback($entity);
         }
 
         return $collection;
