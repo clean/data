@@ -1,5 +1,4 @@
-<?php
-namespace Clean\Data;
+<?php namespace Clean\Data;
 
 class Entity
 {
