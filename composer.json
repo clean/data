@@ -5,7 +5,8 @@
     "keywords": ["collection", "entity", "data"],
     "license": "Apache-2.0",
     "require-dev": {
-        "phpunit/phpunit": "4.2.*"
+        "phpunit/phpunit": "4.2.*",
+        "scrutinizer/ocular": "dev-master"
     },
     "autoload": {
         "psr-4": {
