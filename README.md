@@ -2,7 +2,7 @@
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/clean/data/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/clean/data/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/clean/data/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/clean/data/?branch=master)
-[![Build Status](https://scrutinizer-ci.com/g/clean/data/badges/build.png?b=master)](https://scrutinizer-ci.com/g/clean/data/build-status/master)
+[![Build Status](https://travis-ci.org/clean/data.svg?branch=master)](https://travis-ci.org/clean/data)
 
 Set of classes for holding data (entity, collection)
 
