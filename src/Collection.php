@@ -1,5 +1,4 @@
-<?php
-namespace Clean\Data;
+<?php namespace Clean\Data;
 
 class Collection extends \ArrayIterator
 {
@@ -14,19 +13,32 @@ class Collection extends \ArrayIterator
     public function __call($name, $args)
     {
         if ($this->count() > 1) {
-            throw new \LogicException("Collection has more then one element, you cannot call entity method directly");
+            throw new \LogicException(
+                'Collection has more then one element, you cannot call entity method directly'
+            );
         }
         $current = $this->first();
         if (!$current) {
-            throw new \LogicException("Cannot operate on empty collection");
+            throw new \LogicException('Cannot operate on empty collection');
         }
         return call_user_func_array(array($current, $name), $args);
     }
 
+    /**
+     * Returns direct value from entity when collection has only one element
+     *
+     * @param string $name property name
+     *
+     * @throws \LogicException when collection has more then one element
+     *
+     * @return mixed
+     */
     public function __get($name)
     {
         if ($this->count() > 1) {
-            throw new \LogicException("Collection has more then one element, you cannot get entity property directly");
+            throw new \LogicException(
+                'Collection has more then one element, you cannot get entity property directly'
+            );
         }
         $current = $this->first();
         if (!$current) {
@@ -255,7 +267,9 @@ class Collection extends \ArrayIterator
                     $collection[$key] = $entity;
                 }
             } else {
-                throw new \InvalidArgumentException("Invalid operator used: '$operator'");
+                throw new \InvalidArgumentException(
+                    sprintf('Invalid operator used: %s', $operator)
+                );
             }
         }
         return $collection;
@@ -435,7 +449,7 @@ class Collection extends \ArrayIterator
 
     /**
      * @param integer $offset
-     * @param integer $length
+     * @param integer|null $length
      */
     public function slice($offset, $length = null)
     {
