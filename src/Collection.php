@@ -91,7 +91,9 @@ class Collection extends \ArrayIterator
                 $this->append($value);
             }
         } else {
-            throw new \InvalidArgumentException("Invalid argument supplied to method. Must be array or implement Traversable interface");
+            throw new \InvalidArgumentException(
+                'Invalid argument supplied to method. Must be array or implement Traversable interface'
+            );
         }
         return $this;
     }
@@ -103,8 +105,8 @@ class Collection extends \ArrayIterator
      */
     public function getRandom()
     {
-        $random_key = array_rand($this->getArrayCopy());
-        return $this[$random_key];
+        $randomKey = array_rand($this->getArrayCopy());
+        return $this[$randomKey];
     }
 
 
@@ -119,7 +121,7 @@ class Collection extends \ArrayIterator
     public function orderBy($element, $order = 'asc')
     {
         $this->uasort(
-            function($a, $b) use ($element, $order) {
+            function ($a, $b) use ($element, $order) {
                 $m = ($order == 'desc') ? -1 : 1;
 
                 if (is_object($a) && is_object($b)) {
@@ -130,11 +132,13 @@ class Collection extends \ArrayIterator
                         $valueA = $a->$element;
                         $valueB = $b->$element;
                     }
-                } else if (is_array($a) && is_array($b)) {
+                } elseif (is_array($a) && is_array($b)) {
                     $valueA = $a[$element];
                     $valueB = $b[$element];
                 } else {
-                    throw new \InvalidArgumentException(sprintf("Collection can't be sorted it contains invalid data type: %s", gettype($a)));
+                    throw new \InvalidArgumentException(
+                        sprintf("Collection can't be sorted it contains invalid data type: %s", gettype($a))
+                    );
                 }
                 return  ($valueA > $valueB ? 1 * $m : ($valueA < $valueB ? -1 * $m : 0));
             }
@@ -146,7 +150,7 @@ class Collection extends \ArrayIterator
     public function orderTree($childProperty, $parentProperty)
     {
         $this->uasort(
-            function($a, $b) use ($childProperty, $parentProperty) {
+            function ($a, $b) use ($childProperty, $parentProperty) {
                 if (!$a->$parentProperty) {
                     return -1;
                 }
@@ -297,7 +301,6 @@ class Collection extends \ArrayIterator
         $collection = new $class;
 
         foreach ($this as $entity) {
-
             if (!isset($entity->$field)) {
                 continue;
             }
