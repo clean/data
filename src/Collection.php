@@ -195,18 +195,6 @@ class Collection extends \ArrayIterator
         }
     }
 
-    /**
-     * @deprecated use first() method instead
-     */
-    public function getFirst()
-    {
-        if ($this->offsetExists(0)) {
-            return $this->offsetGet(0);
-        }
-
-        return null;
-    }
-
     public function groupByField($name, $callback = null)
     {
         $class = get_called_class();
