@@ -230,23 +230,23 @@ class Collection extends \ArrayIterator
                 if (in_array($entity->$field, $arrayValue, ($operator == '=') ? true : false)) {
                     $collection[$key] = $entity;
                 }
-            } else if ($operator == '!=') {
+            } elseif ($operator == '!=') {
                 if (!in_array($entity->$field, $arrayValue, true)) {
                     $collection[$key] = $entity;
                 }
-            } else if ($operator == '>') {
+            } elseif ($operator == '>') {
                 if ($entity->$field > $value) {
                     $collection[$key] = $entity;
                 }
-            } else if ($operator == '>=') {
+            } elseif ($operator == '>=') {
                 if ($entity->$field >= $value) {
                     $collection[$key] = $entity;
                 }
-            } else if ($operator == '<') {
+            } elseif ($operator == '<') {
                 if ($entity->$field < $value) {
                     $collection[$key] = $entity;
                 }
-            } else if ($operator == '<=') {
+            } elseif ($operator == '<=') {
                 if ($entity->$field <= $value) {
                     $collection[$key] = $entity;
                 }
@@ -330,7 +330,6 @@ class Collection extends \ArrayIterator
         $collection = new $class;
 
         foreach ($this as $entity) {
-
             if (isset($entity->$field)) {
                 continue;
             }
@@ -519,7 +518,7 @@ class Collection extends \ArrayIterator
     {
         $positions = array_flip($this->getKeys());
         $this->uksort(
-            function($a, $b) use ($positions) {
+            function ($a, $b) use ($positions) {
                 return ($positions[$a] < $positions[$b] ? 1 : -1);
             }
         );
