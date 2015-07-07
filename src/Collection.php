@@ -525,7 +525,7 @@ class Collection extends \ArrayIterator
     /**
      * Return an collection with elements in reverse order
      *
-     * @return this
+     * @return Collection
      */
     public function reverse()
     {
@@ -563,7 +563,7 @@ class Collection extends \ArrayIterator
      *
      * @param Closure $callback user supplied function
      *
-     * @return this
+     * @return Collection
      */
     public function walk(Closure $callback)
     {
