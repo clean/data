@@ -473,6 +473,11 @@ class Collection extends \ArrayIterator
         return $this;
     }
 
+    /**
+     * Tranform collection to array
+     *
+     * @return array
+     */
     public function toArray()
     {
         $result = array();
@@ -517,6 +522,11 @@ class Collection extends \ArrayIterator
         return $collection;
     }
 
+    /**
+     * Return an collection with elements in reverse order
+     *
+     * @return this
+     */
     public function reverse()
     {
         $positions = array_flip($this->getKeys());
@@ -529,6 +539,13 @@ class Collection extends \ArrayIterator
         return $this;
     }
 
+    /**
+     * Applies the callback to the elements of Collection
+     *
+     * @param Closure $callback callback
+     *
+     * @return Collection
+     */
     public function map(Closure $callback)
     {
         $class = get_called_class();
@@ -541,6 +558,13 @@ class Collection extends \ArrayIterator
         return $collection;
     }
 
+    /**
+     * Apply a user supplied function to every member of an Collection
+     *
+     * @param Closure $callback user supplied function
+     *
+     * @return this
+     */
     public function walk(Closure $callback)
     {
         foreach ($this as $key => &$entity) {
@@ -550,6 +574,15 @@ class Collection extends \ArrayIterator
         return $this;
     }
 
+    /**
+     * Search for an element with given property and value
+     *
+     * @param string $field name of property
+     * @param mixed $value value to compare
+     * @param bool $strict compare value and type of property
+     *
+     * @return void
+     */
     public function search($field, $value, $strict = false)
     {
         if ($strict) {
@@ -585,6 +618,11 @@ class Collection extends \ArrayIterator
         return $collection;
     }
 
+    /**
+     * Returns new instance of collection of the same type
+     *
+     * @return Collection
+     */
     public function getNewCollection()
     {
         $class = get_called_class();
