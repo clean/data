@@ -12,5 +12,8 @@
         "psr-4": {
             "Clean\\Data\\": "src/"
         }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
     }
 }
