@@ -8,9 +8,4 @@ class Entity
             $this->$key = $item;
         }
     }
-
-    public function toArray()
-    {
-        return (array)$this;
-    }
 }

@@ -497,7 +497,7 @@ class Collection extends \ArrayIterator
         $result = array();
 
         foreach ($this as $entity) {
-            $result[] = $entity->toArray();
+            $result[] = (array)$entity;
         }
 
         return $result;
