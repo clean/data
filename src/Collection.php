@@ -289,11 +289,19 @@ class Collection extends \ArrayIterator
         return $collection;
     }
 
+    /**
+     * Checks if collection has entity with field equals to given value
+     *
+     * @param string $field field
+     * @param mixed $value value
+     *
+     * @return bool
+     */
     public function has($field, $value)
     {
         $value = is_array($value) ? $value : array($value);
         foreach ($this as $entity) {
-            if (in_array($entity->$field, $value, true)) {
+            if (isset($entity->$field) && in_array($entity->$field, $value, true)) {
                 return true;
             }
         }
