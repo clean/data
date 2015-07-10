@@ -494,10 +494,16 @@ class Collection extends \ArrayIterator
      */
     public function toArray()
     {
-        $result = array();
+        $result = [];
 
         foreach ($this as $entity) {
-            $result[] = (array)$entity;
+            if ($entity instanceof Entity) {
+                $result[] = (array)$entity;
+            } elseif (is_scalar($entity)) {
+                $result[] = $entity;
+            } elseif ($entity instanceof Collection) {
+                $result[] = $entity->toArray();
+            }
         }
 
         return $result;
