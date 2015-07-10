@@ -421,6 +421,11 @@ class Collection extends \ArrayIterator
         return $collection;
     }
 
+    /**
+     * Shift an entity off the begining of collection
+     *
+     * @return Entity
+     */
     public function shift()
     {
         $slice = $this->slice(0, 1);
@@ -476,6 +481,11 @@ class Collection extends \ArrayIterator
         return $this->chunk($elementsPerChunk);
     }
 
+    /**
+     * Remove all entities form collection
+     *
+     * @return Collection
+     */
     public function clear()
     {
         $keys = $this->getKeys();
