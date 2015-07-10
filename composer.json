@@ -1,9 +1,9 @@
 {
     "name": "clean/data",
     "type": "library",
-    "description": "Set of classes for holding data (entity, collection)",
+    "description": "Set of classes for keeping data (entity, collection)",
     "keywords": ["collection", "entity", "data"],
-    "license": "Apache-2.0",
+    "license": "MIT",
     "require-dev": {
         "phpunit/phpunit": "4.2.*",
         "scrutinizer/ocular": "dev-master"
