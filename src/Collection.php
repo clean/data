@@ -434,12 +434,15 @@ class Collection extends \ArrayIterator
         return $slice->first();
     }
 
+    /**
+     * Prepand element to the begining of collection
+     *
+     * @param mixed $element element
+     *
+     * @return Collection
+     */
     public function unshift($element)
     {
-        if ($element instanceof Collection) {
-            $element = $element->first();
-        }
-
         $class = get_called_class();
         $collection = new $class;
 
