@@ -634,10 +634,9 @@ class Collection extends \ArrayIterator
             }
 
             if ($entity->$targetKey !== null && isset($collection[$entity->$targetKey])) {
-                $entity->$propertyName->appendArray($collection[$entity->$targetKey]);
+                $entity->$propertyName->append($collection[$entity->$targetKey]);
             }
         }
         return $this;
     }
-
 }
