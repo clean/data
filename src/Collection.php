@@ -363,19 +363,30 @@ class Collection extends \ArrayIterator
         return $this;
     }
 
-    public function distinctOn($property)
+    /**
+     * Eliminates entities that contains the same value in given property
+     *
+     * @param string $propertyName Name of the property
+     *
+     * @return Collection
+     */
+    public function distinctOn($propertyName)
     {
-        $uniques = array();
-        $collection = new self;
-
+        $values = [];
+        $keys = [];
         foreach ($this as $key => $entity) {
-            if (!in_array($entity->$property, $uniques)) {
-                $collection[$key] = $entity;
-                $uniques[] = $entity->$property;
+            if (in_array($entity->$propertyName, $values)) {
+                $keys[] = $key;
+            } else {
+                $values[] = $entity->$propertyName;
             }
         }
 
-        return $collection;
+        foreach ($keys as $key) {
+            $this->offsetUnset($key);
+        }
+
+        return $this;
     }
 
     /**
