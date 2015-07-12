@@ -437,12 +437,22 @@ class Collection extends \ArrayIterator
         return $this;
     }
 
-    public function getAllValuesForProperty($name, $asCollection = false)
+    /**
+     * Return values from all entities from given property
+     *
+     * @param string $name name
+     *
+     * @return array
+     */
+    public function getAllValuesForProperty($name)
     {
-        $ids = array();
+        $values = [];
         foreach ($this as $entity) {
-            $value = $entity->$name;
+            if (!isset($entity->$name)) {
+                continue;
+            }
 
+            $value = $entity->$name;
             if ($value instanceof Collection && $value->isEmpty()) {
                 continue;
             }
@@ -452,17 +462,13 @@ class Collection extends \ArrayIterator
             }
 
             if (is_scalar($value)) {
-                $ids[$value] = $value;
+                $values[$value] = $value;
             } else {
-                $ids[] = $value;
+                $values[] = $value;
             }
         }
 
-        if ($asCollection) {
-            return new self(array_values($ids));
-        } else {
-            return array_values($ids);
-        }
+        return array_values($values);
     }
 
     /**
