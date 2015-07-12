@@ -209,7 +209,6 @@ class Collection extends \ArrayIterator
      */
     public function unshift($element)
     {
-        $class = get_called_class();
         $collection = $this->getNewCollection();
 
         $collection[] = $element;
@@ -231,8 +230,7 @@ class Collection extends \ArrayIterator
 
     public function filter(\Closure $callback)
     {
-        $class = get_called_class();
-        $collection = new $class;
+        $collection = $this->getNewCollection();
 
         foreach ($this as $key => $entity) {
             if ($callback($entity)) {
@@ -265,11 +263,10 @@ class Collection extends \ArrayIterator
      */
     public function chunk($size)
     {
-        $class = get_called_class();
-        $collection = new $class;
+        $collection = $this->getNewCollection();
 
         foreach (array_chunk($this->getKeys(), $size) as $chunkIndex => $keys) {
-            $collection[$chunkIndex] = new $class;
+            $collection[$chunkIndex] = $this->getNewCollection();
 
             foreach ($keys as $key) {
                 $collection[$chunkIndex]->append($this[$key]);
@@ -292,8 +289,7 @@ class Collection extends \ArrayIterator
 
         $keys = array_slice($keys, $offset, $length);
 
-        $class = get_called_class();
-        $collection = new $class;
+        $collection = $this->getNewCollection();
 
         foreach ($this as $key => $entity) {
             if (in_array($key, $keys)) {
@@ -408,8 +404,7 @@ class Collection extends \ArrayIterator
      */
     public function map(Closure $callback)
     {
-        $class = get_called_class();
-        $collection = new $class;
+        $collection = $this->getNewCollection();
 
         foreach ($this as $key => $entity) {
             $collection[$key] = $callback($entity);
@@ -560,8 +555,7 @@ class Collection extends \ArrayIterator
 
     public function groupByField($name, $callback = null)
     {
-        $class = get_called_class();
-        $collection = new $class;
+        $collection = $this->getNewCollection();
         foreach ($this as $entity) {
             if ($entity->$name === null) {
                 continue; //when entity dosen't have set property with this name it will be omitted
@@ -573,18 +567,16 @@ class Collection extends \ArrayIterator
             }
 
             if (!isset($collection[$value])) {
-                $collection[$value] = new $class(array($entity));
-            } else {
-                $collection[$value]->append($entity);
+                $collection[$value] = $this->getNewCollection();
             }
+            $collection[$value]->append($entity);
         }
         return $collection;
     }
 
     public function filterBy($field, $value, $operator = '=')
     {
-        $class = get_called_class();
-        $collection = new $class;
+        $collection = $this->getNewCollection();
 
         $arrayValue = is_array($value) ? $value : array($value);
 
