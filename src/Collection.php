@@ -196,11 +196,7 @@ class Collection extends \ArrayIterator
      */
     public function has($field, $value, $strict = false)
     {
-        if (false === $this->search($field, $value, $strict)) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(false === $this->search($field, $value, $strict));
     }
 
     /**
