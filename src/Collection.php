@@ -218,18 +218,29 @@ class Collection extends \ArrayIterator
         return $slice->first();
     }
 
+    /**
+     * Filter collection from entities not matching criteria given in callback
+     *
+     * @param \Closure $callback callback
+     *
+     * @return Collection
+     */
     public function filter(\Closure $callback)
     {
-        $collection = $this->getNewCollection();
-
-        foreach ($this as $key => $entity) {
-            if ($callback($entity)) {
-                $collection[$key] = $entity;
+        $offsetToRemove = [];
+        foreach ($this as $offset => $entity) {
+            if (!$callback($entity)) {
+                $offsetToRemove[] = $offset;
             }
         }
 
-        return $collection;
+        foreach ($offsetToRemove as $offset) {
+            $this->offsetUnset($offset);
+        }
+
+        return $this;
     }
+
 
     /**
      * Returns collection keys
