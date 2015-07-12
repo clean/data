@@ -1,14 +1,37 @@
 <?php namespace Clean\Data;
 
+use InvalidArgumentException;
+
 class Collection extends \ArrayIterator
 {
     public function __construct($data = null)
     {
         parent::__construct([]);
         if ($data) {
-            $this->appendArray($data);
+            $this->append($data);
         }
     }
+
+    /**
+     * Append entities to collection
+     *
+     * @param Traversable $data
+     * @access public
+     *
+     * @return Collection
+     */
+    public function append($data)
+    {
+        if (is_array($data) || $data instanceof \Traversable) {
+            foreach ($data as $value) {
+                parent::append($value);
+            }
+        } else {
+            parent::append($data);
+        }
+        return $this;
+    }
+
 
     public function __call($name, $args)
     {
@@ -87,27 +110,6 @@ class Collection extends \ArrayIterator
         } else {
             return array_values($ids);
         }
-    }
-
-    /**
-     * append array values to collection
-     *
-     * @param array $data
-     * @access public
-     * @return Collection
-     */
-    public function appendArray($data)
-    {
-        if (is_array($data) || $data instanceof \Traversable) {
-            foreach ($data as $value) {
-                $this->append($value);
-            }
-        } else {
-            throw new \InvalidArgumentException(
-                'Invalid argument supplied to method. Must be array or implement Traversable interface'
-            );
-        }
-        return $this;
     }
 
     /**
