@@ -194,12 +194,30 @@ class Collection extends \ArrayIterator
      *
      * @return bool
      */
-    public function has($field, $value)
+    public function has($field, $value, $strict = false)
+    {
+        if (false === $this->search($field, $value, $strict)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * Search for an element with given property and value
+     *
+     * @param string $field name of property
+     * @param mixed $value value to compare
+     * @param bool $strict compare value and type of property
+     *
+     * @return void
+     */
+    public function search($field, $value, $strict = false)
     {
         $value = is_array($value) ? $value : array($value);
-        foreach ($this as $entity) {
-            if (isset($entity->$field) && in_array($entity->$field, $value, true)) {
-                return true;
+        foreach ($this as $key => $entity) {
+            if (isset($entity->$field) && in_array($entity->$field, $value, $strict)) {
+                return $key;
             }
         }
 
@@ -421,34 +439,6 @@ class Collection extends \ArrayIterator
         }
 
         return $this;
-    }
-
-    /**
-     * Search for an element with given property and value
-     *
-     * @param string $field name of property
-     * @param mixed $value value to compare
-     * @param bool $strict compare value and type of property
-     *
-     * @return void
-     */
-    public function search($field, $value, $strict = false)
-    {
-        if ($strict) {
-            foreach ($this as $key => $entity) {
-                if ($entity->{$field} === $value) {
-                    return $key;
-                }
-            }
-        } else {
-            foreach ($this as $key => $entity) {
-                if ($entity->{$field} == $value) {
-                    return $key;
-                }
-            }
-        }
-
-        return false;
     }
 
     /**
