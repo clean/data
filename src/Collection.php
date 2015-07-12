@@ -1,7 +1,7 @@
 <?php namespace Clean\Data;
 
-use InvalidArgumentException;
 use Closure;
+use InvalidArgumentException;
 
 class Collection extends \ArrayIterator
 {
