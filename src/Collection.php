@@ -13,6 +13,17 @@ class Collection extends \ArrayIterator
     }
 
     /**
+     * Returns new instance of collection of the same type
+     *
+     * @return Collection
+     */
+    public function getNewCollection()
+    {
+        $class = get_called_class();
+        return new $class;
+    }
+
+    /**
      * Append entities to collection
      *
      * @param Traversable $data
@@ -70,12 +81,22 @@ class Collection extends \ArrayIterator
         return $current->$name;
     }
 
+    /**
+     * Returns first entity from collection
+     *
+     * @return Entity
+     */
     public function first()
     {
         $this->rewind();
         return $this->current();
     }
 
+    /**
+     * Returns last entity from collection
+     *
+     * @return Entity
+     */
     public function last()
     {
         $this->seek($this->count() - 1);
@@ -84,115 +105,11 @@ class Collection extends \ArrayIterator
         return $entity;
     }
 
-    public function getAllValuesForProperty($name, $asCollection = false)
-    {
-        $ids = array();
-        foreach ($this as $entity) {
-            $value = $entity->$name;
-
-            if ($value instanceof Collection && $value->isEmpty()) {
-                continue;
-            }
-
-            if (null === $value) {
-                continue;
-            }
-
-            if (is_scalar($value)) {
-                $ids[$value] = $value;
-            } else {
-                $ids[] = $value;
-            }
-        }
-
-        if ($asCollection) {
-            return new self(array_values($ids));
-        } else {
-            return array_values($ids);
-        }
-    }
-
     /**
-     * returns random value from collection
+     * Returns next entity from collection
      *
-     * @return Colection element
+     * @return Entity
      */
-    public function getRandom()
-    {
-        $randomKey = array_rand($this->getArrayCopy());
-        return $this[$randomKey];
-    }
-
-
-    /**
-     * Order collection elements by some property
-     *
-     * @param string $element
-     * @param string $order desc|asc
-     * @access public
-     * @return Collection
-     */
-    public function orderBy($element, $order = 'asc')
-    {
-        $this->uasort(
-            function ($a, $b) use ($element, $order) {
-                $m = ($order == 'desc') ? -1 : 1;
-
-                if (is_object($a) && is_object($b)) {
-                    if ($element instanceof \Closure) {
-                        $valueA = $element($a);
-                        $valueB = $element($b);
-                    } else {
-                        $valueA = $a->$element;
-                        $valueB = $b->$element;
-                    }
-                } elseif (is_array($a) && is_array($b)) {
-                    $valueA = $a[$element];
-                    $valueB = $b[$element];
-                } else {
-                    throw new \InvalidArgumentException(
-                        sprintf("Collection can't be sorted it contains invalid data type: %s", gettype($a))
-                    );
-                }
-                return  ($valueA > $valueB ? 1 * $m : ($valueA < $valueB ? -1 * $m : 0));
-            }
-        );
-        $this->rewind();
-        return $this;
-    }
-
-    public function orderTree($childProperty, $parentProperty)
-    {
-        $this->uasort(
-            function ($a, $b) use ($childProperty, $parentProperty) {
-                if (!$a->$parentProperty) {
-                    return -1;
-                }
-
-                return ($a->$childProperty == $b->$parentProperty) ? -1 : 1;
-            }
-        );
-        $this->rewind();
-        return $this;
-    }
-
-    public function order($sort)
-    {
-        $this->uasort($sort);
-        $this->rewind();
-        return $this;
-    }
-
-    public function isNotEmpty()
-    {
-        return !$this->isEmpty();
-    }
-
-    public function isEmpty()
-    {
-        return (0 === $this->count());
-    }
-
     public function getNext()
     {
         if (!is_int($this->key())) {
@@ -203,6 +120,11 @@ class Collection extends \ArrayIterator
         }
     }
 
+    /**
+     * Returns previous entity from collection
+     *
+     * @return Entity
+     */
     public function getPrevious()
     {
         if (!is_int($this->key())) {
@@ -213,83 +135,37 @@ class Collection extends \ArrayIterator
         }
     }
 
-    public function groupByField($name, $callback = null)
+    /**
+     * returns random entity from collection
+     *
+     * @return Entity
+     */
+    public function getRandom()
     {
-        $class = get_called_class();
-        $collection = new $class;
-        foreach ($this as $entity) {
-            if ($entity->$name === null) {
-                continue; //when entity dosen't have set property with this name it will be omitted
-            }
-
-            $value = $entity->$name;
-            if (is_callable($callback)) {
-                $value = $callback($value);
-            }
-
-            if (!isset($collection[$value])) {
-                $collection[$value] = new $class(array($entity));
-            } else {
-                $collection[$value]->append($entity);
-            }
-        }
-        return $collection;
+        $randomKey = array_rand($this->getArrayCopy());
+        return $this[$randomKey];
     }
 
-    public function filterBy($field, $value, $operator = '=')
+    /**
+     * Returns true if collection is not empty
+     *
+     * @return bool
+     */
+    public function isNotEmpty()
     {
-        $class = get_called_class();
-        $collection = new $class;
-
-        $arrayValue = is_array($value) ? $value : array($value);
-
-        foreach ($this as $key => $entity) {
-            if ($operator == '=' || $operator == '~') {
-                if (in_array($entity->$field, $arrayValue, ($operator == '=') ? true : false)) {
-                    $collection[$key] = $entity;
-                }
-            } elseif ($operator == '!=') {
-                if (!in_array($entity->$field, $arrayValue, true)) {
-                    $collection[$key] = $entity;
-                }
-            } elseif ($operator == '>') {
-                if ($entity->$field > $value) {
-                    $collection[$key] = $entity;
-                }
-            } elseif ($operator == '>=') {
-                if ($entity->$field >= $value) {
-                    $collection[$key] = $entity;
-                }
-            } elseif ($operator == '<') {
-                if ($entity->$field < $value) {
-                    $collection[$key] = $entity;
-                }
-            } elseif ($operator == '<=') {
-                if ($entity->$field <= $value) {
-                    $collection[$key] = $entity;
-                }
-            } else {
-                throw new \InvalidArgumentException(
-                    sprintf('Invalid operator used: %s', $operator)
-                );
-            }
-        }
-        return $collection;
+        return !$this->isEmpty();
     }
 
-    public function filter(\Closure $callback)
+    /**
+     * Returns true if collection is empty
+     *
+     * @return bool
+     */
+    public function isEmpty()
     {
-        $class = get_called_class();
-        $collection = new $class;
-
-        foreach ($this as $key => $entity) {
-            if ($callback($entity)) {
-                $collection[$key] = $entity;
-            }
-        }
-
-        return $collection;
+        return (0 === $this->count());
     }
+
 
     /**
      * Checks if collection has entity with field equals to given value
@@ -309,50 +185,6 @@ class Collection extends \ArrayIterator
         }
 
         return false;
-    }
-
-    public function bindCollection(Collection $collection, $targetKey, $propertyName)
-    {
-        $reflection = new \ReflectionClass($collection);
-        foreach ($this as $entity) {
-            if (!isset($entity->$propertyName)) {
-                $entity->$propertyName = new $reflection->name;
-            }
-
-            if ($entity->$targetKey !== null && isset($collection[$entity->$targetKey])) {
-                $entity->$propertyName->appendArray($collection[$entity->$targetKey]);
-            }
-        }
-        return $this;
-    }
-
-    public function getKeys()
-    {
-        $keys = array();
-        foreach ($this as $key => $entity) {
-            $keys[] = $key;
-        }
-
-        return $keys;
-    }
-
-    /**
-     * @param double $size
-     */
-    public function chunk($size)
-    {
-        $class = get_called_class();
-        $collection = new $class;
-
-        foreach (array_chunk($this->getKeys(), $size) as $chunkIndex => $keys) {
-            $collection[$chunkIndex] = new $class;
-
-            foreach ($keys as $key) {
-                $collection[$chunkIndex]->append($this[$key]);
-            }
-        }
-
-        return $collection;
     }
 
     /**
@@ -378,7 +210,7 @@ class Collection extends \ArrayIterator
     public function unshift($element)
     {
         $class = get_called_class();
-        $collection = new $class;
+        $collection = $this->getNewCollection();
 
         $collection[] = $element;
 
@@ -389,7 +221,68 @@ class Collection extends \ArrayIterator
         return $collection;
     }
 
+    public function order($sort)
+    {
+        $this->uasort($sort);
+        $this->rewind();
+        return $this;
+    }
+
+
+    public function filter(\Closure $callback)
+    {
+        $class = get_called_class();
+        $collection = new $class;
+
+        foreach ($this as $key => $entity) {
+            if ($callback($entity)) {
+                $collection[$key] = $entity;
+            }
+        }
+
+        return $collection;
+    }
+
     /**
+     * Returns collection keys
+     *
+     * @return array
+     */
+    public function getKeys()
+    {
+        $keys = array();
+        foreach ($this as $key => $entity) {
+            $keys[] = $key;
+        }
+
+        return $keys;
+    }
+
+    /**
+     * Splits collection into chunks
+     *
+     * @param integer $size
+     */
+    public function chunk($size)
+    {
+        $class = get_called_class();
+        $collection = new $class;
+
+        foreach (array_chunk($this->getKeys(), $size) as $chunkIndex => $keys) {
+            $collection[$chunkIndex] = new $class;
+
+            foreach ($keys as $key) {
+                $collection[$chunkIndex]->append($this[$key]);
+            }
+        }
+
+        return $collection;
+    }
+
+
+    /**
+     * Extract a slice of the collection
+     *
      * @param integer $offset
      * @param integer|null $length
      */
@@ -585,14 +478,163 @@ class Collection extends \ArrayIterator
         return $collection;
     }
 
+    public function getAllValuesForProperty($name, $asCollection = false)
+    {
+        $ids = array();
+        foreach ($this as $entity) {
+            $value = $entity->$name;
+
+            if ($value instanceof Collection && $value->isEmpty()) {
+                continue;
+            }
+
+            if (null === $value) {
+                continue;
+            }
+
+            if (is_scalar($value)) {
+                $ids[$value] = $value;
+            } else {
+                $ids[] = $value;
+            }
+        }
+
+        if ($asCollection) {
+            return new self(array_values($ids));
+        } else {
+            return array_values($ids);
+        }
+    }
+
     /**
-     * Returns new instance of collection of the same type
+     * Order collection elements by some property
      *
+     * @param string $element
+     * @param string $order desc|asc
+     * @access public
      * @return Collection
      */
-    public function getNewCollection()
+    public function orderBy($element, $order = 'asc')
+    {
+        $this->uasort(
+            function ($a, $b) use ($element, $order) {
+                $m = ($order == 'desc') ? -1 : 1;
+
+                if (is_object($a) && is_object($b)) {
+                    if ($element instanceof \Closure) {
+                        $valueA = $element($a);
+                        $valueB = $element($b);
+                    } else {
+                        $valueA = $a->$element;
+                        $valueB = $b->$element;
+                    }
+                } elseif (is_array($a) && is_array($b)) {
+                    $valueA = $a[$element];
+                    $valueB = $b[$element];
+                } else {
+                    throw new \InvalidArgumentException(
+                        sprintf("Collection can't be sorted it contains invalid data type: %s", gettype($a))
+                    );
+                }
+                return  ($valueA > $valueB ? 1 * $m : ($valueA < $valueB ? -1 * $m : 0));
+            }
+        );
+        $this->rewind();
+        return $this;
+    }
+
+    public function orderTree($childProperty, $parentProperty)
+    {
+        $this->uasort(
+            function ($a, $b) use ($childProperty, $parentProperty) {
+                if (!$a->$parentProperty) {
+                    return -1;
+                }
+
+                return ($a->$childProperty == $b->$parentProperty) ? -1 : 1;
+            }
+        );
+        $this->rewind();
+        return $this;
+    }
+
+    public function groupByField($name, $callback = null)
     {
         $class = get_called_class();
-        return new $class;
+        $collection = new $class;
+        foreach ($this as $entity) {
+            if ($entity->$name === null) {
+                continue; //when entity dosen't have set property with this name it will be omitted
+            }
+
+            $value = $entity->$name;
+            if (is_callable($callback)) {
+                $value = $callback($value);
+            }
+
+            if (!isset($collection[$value])) {
+                $collection[$value] = new $class(array($entity));
+            } else {
+                $collection[$value]->append($entity);
+            }
+        }
+        return $collection;
     }
+
+    public function filterBy($field, $value, $operator = '=')
+    {
+        $class = get_called_class();
+        $collection = new $class;
+
+        $arrayValue = is_array($value) ? $value : array($value);
+
+        foreach ($this as $key => $entity) {
+            if ($operator == '=' || $operator == '~') {
+                if (in_array($entity->$field, $arrayValue, ($operator == '=') ? true : false)) {
+                    $collection[$key] = $entity;
+                }
+            } elseif ($operator == '!=') {
+                if (!in_array($entity->$field, $arrayValue, true)) {
+                    $collection[$key] = $entity;
+                }
+            } elseif ($operator == '>') {
+                if ($entity->$field > $value) {
+                    $collection[$key] = $entity;
+                }
+            } elseif ($operator == '>=') {
+                if ($entity->$field >= $value) {
+                    $collection[$key] = $entity;
+                }
+            } elseif ($operator == '<') {
+                if ($entity->$field < $value) {
+                    $collection[$key] = $entity;
+                }
+            } elseif ($operator == '<=') {
+                if ($entity->$field <= $value) {
+                    $collection[$key] = $entity;
+                }
+            } else {
+                throw new \InvalidArgumentException(
+                    sprintf('Invalid operator used: %s', $operator)
+                );
+            }
+        }
+        return $collection;
+    }
+
+    public function bindCollection(Collection $collection, $targetKey, $propertyName)
+    {
+        $reflection = new \ReflectionClass($collection);
+        foreach ($this as $entity) {
+            if (!isset($entity->$propertyName)) {
+                $entity->$propertyName = new $reflection->name;
+            }
+
+            if ($entity->$targetKey !== null && isset($collection[$entity->$targetKey])) {
+                $entity->$propertyName->appendArray($collection[$entity->$targetKey]);
+            }
+        }
+        return $this;
+    }
+
 }
