@@ -408,21 +408,6 @@ class Collection extends \ArrayIterator
     }
 
     /**
-     * Applies the callback to the elements of Collection
-     *
-     * @param Closure $callback callback
-     *
-     * @return Collection
-     */
-    public function map(Closure $callback)
-    {
-        foreach ($this as $entity) {
-            $callback($entity);
-        }
-        return $this;
-    }
-
-    /**
      * Apply a user supplied function to every member of an Collection
      *
      * @param Closure $callback user supplied function
@@ -431,8 +416,8 @@ class Collection extends \ArrayIterator
      */
     public function walk(Closure $callback)
     {
-        foreach ($this as $key => &$entity) {
-            $entity = $callback($entity);
+        foreach ($this as &$entity) {
+            $callback($entity);
         }
 
         return $this;

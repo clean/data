@@ -1,4 +1,4 @@
-<?php namespace Test\Clean\Data\Collection\map;
+<?php namespace Test\Clean\Data\Collection\walk;
 
 use Clean\Data\Collection;
 use Clean\Data\Entity;
