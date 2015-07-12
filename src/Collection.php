@@ -43,6 +43,24 @@ class Collection extends \ArrayIterator
         return $this;
     }
 
+    /**
+     * Prepand entity to the begining of collection
+     *
+     * @param Entity $entity
+     *
+     * @return Collection
+     */
+    public function prepend($entity)
+    {
+        $collection = $this->getNewCollection();
+        $collection->append($entity);
+        foreach ($this as $entity) {
+            $collection->append($entity);
+        }
+        $this->clear();
+        $this->append($collection);
+        return $this;
+    }
 
     public function __call($name, $args)
     {
@@ -198,25 +216,6 @@ class Collection extends \ArrayIterator
         $offset = $slice->getKeys();
         $this->offsetUnset($offset[0]);
         return $slice->first();
-    }
-
-    /**
-     * Prepand entity to the begining of collection
-     *
-     * @param Entity $entity
-     *
-     * @return Collection
-     */
-    public function prepend($entity)
-    {
-        $collection = $this->getNewCollection();
-        $collection->append($entity);
-        foreach ($this as $entity) {
-            $collection->append($entity);
-        }
-        $this->clear();
-        $this->append($collection);
-        return $this;
     }
 
     public function order($sort)
