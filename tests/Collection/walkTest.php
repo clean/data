@@ -13,7 +13,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
             new Entity(['id' => 3]),
         ]);
 
-        $collection->map(function ($entity) {
+        $collection->walk(function ($entity) {
             $entity->id *= $entity->id;
         });
 
