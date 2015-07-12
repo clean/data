@@ -14,11 +14,13 @@ class TestCase extends \PHPUnit_Framework_TestCase
         $collection = new Collection([$entity1, $entity2, $entity3]);
 
         $this->assertTrue($collection->has('id', 1));
+        $this->assertTrue($collection->has('id', 1));
         $this->assertTrue($collection->has('id', [1,5]));
         $this->assertTrue($collection->has('id', 2));
         $this->assertTrue($collection->has('id', 3));
         $this->assertFalse($collection->has('id', [4,5]));
         $this->assertFalse($collection->has('id', 4));
         $this->assertFalse($collection->has('noid', 1));
+        $this->assertFalse($collection->has('id', '1', true));
     }
 }
