@@ -218,14 +218,6 @@ class Collection extends \ArrayIterator
         return $slice->first();
     }
 
-    public function order($sort)
-    {
-        $this->uasort($sort);
-        $this->rewind();
-        return $this;
-    }
-
-
     public function filter(\Closure $callback)
     {
         $collection = $this->getNewCollection();
