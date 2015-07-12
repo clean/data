@@ -201,23 +201,22 @@ class Collection extends \ArrayIterator
     }
 
     /**
-     * Prepand element to the begining of collection
+     * Prepand entity to the begining of collection
      *
-     * @param mixed $element element
+     * @param Entity $entity
      *
      * @return Collection
      */
-    public function unshift($element)
+    public function prepend($entity)
     {
         $collection = $this->getNewCollection();
-
-        $collection[] = $element;
-
+        $collection->append($entity);
         foreach ($this as $entity) {
-            $collection[] = $entity;
+            $collection->append($entity);
         }
-
-        return $collection;
+        $this->clear();
+        $this->append($collection);
+        return $this;
     }
 
     public function order($sort)
@@ -319,7 +318,6 @@ class Collection extends \ArrayIterator
         foreach ($keys as $key) {
             $this->offsetUnset($key);
         }
-
         return $this;
     }
 
