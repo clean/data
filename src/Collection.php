@@ -437,22 +437,6 @@ class Collection extends \ArrayIterator
         return $this;
     }
 
-    /**
-     * Similar to array_diff function. Returns all entities from current collection
-     * that are not exists in second collection based on specific field
-     */
-    public function diff(\Collection $against, $field)
-    {
-        $collection = new self;
-        foreach ($this as $entity) {
-            if (!$against->has($field, $entity->$field)) {
-                $collection->append($entity);
-            }
-        }
-
-        return $collection;
-    }
-
     public function getAllValuesForProperty($name, $asCollection = false)
     {
         $ids = array();
