@@ -1,6 +1,7 @@
 <?php namespace Clean\Data;
 
 use InvalidArgumentException;
+use Closure;
 
 class Collection extends \ArrayIterator
 {
@@ -415,13 +416,10 @@ class Collection extends \ArrayIterator
      */
     public function map(Closure $callback)
     {
-        $collection = $this->getNewCollection();
-
-        foreach ($this as $key => $entity) {
-            $collection[$key] = $callback($entity);
+        foreach ($this as $entity) {
+            $callback($entity);
         }
-
-        return $collection;
+        return $this;
     }
 
     /**
