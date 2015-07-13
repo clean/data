@@ -74,7 +74,7 @@ class Collection extends \ArrayIterator
         if (!$current) {
             throw new \LogicException('Cannot operate on empty collection');
         }
-        return call_user_func_array(array($current, $name), $args);
+        return call_user_func_array([$current, $name], $args);
     }
 
     /**
