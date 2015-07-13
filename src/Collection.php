@@ -71,9 +71,15 @@ class Collection extends \ArrayIterator
             );
         }
         $current = $this->first();
+
         if (!$current) {
             throw new \LogicException('Cannot operate on empty collection');
         }
+
+        if (!method_exists($current, $name)) {
+            throw new \RuntimeException(sprintf("Class %s does not have a method '%s'", get_class($current), $name));
+        }
+
         return call_user_func_array([$current, $name], $args);
     }
 
