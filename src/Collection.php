@@ -1,7 +1,8 @@
 <?php namespace Clean\Data;
 
 use Closure;
-use InvalidArgumentException;
+use LogicException;
+use RuntimeException;
 
 class Collection extends \ArrayIterator
 {
@@ -66,18 +67,18 @@ class Collection extends \ArrayIterator
     public function __call($name, $args)
     {
         if ($this->count() > 1) {
-            throw new \LogicException(
+            throw new LogicException(
                 'Collection has more then one element, you cannot call entity method directly'
             );
         }
         $current = $this->first();
 
         if (!$current) {
-            throw new \LogicException('Cannot operate on empty collection');
+            throw new LogicException('Cannot operate on empty collection');
         }
 
         if (!method_exists($current, $name)) {
-            throw new \RuntimeException(sprintf("Class %s does not have a method '%s'", get_class($current), $name));
+            throw new RuntimeException(sprintf("Class %s does not have a method '%s'", get_class($current), $name));
         }
 
         return call_user_func_array([$current, $name], $args);
@@ -88,14 +89,14 @@ class Collection extends \ArrayIterator
      *
      * @param string $name property name
      *
-     * @throws \LogicException when collection has more then one element
+     * @throws LogicException when collection has more then one element
      *
      * @return mixed
      */
     public function __get($name)
     {
         if ($this->count() > 1) {
-            throw new \LogicException(
+            throw new LogicException(
                 'Collection has more then one element, you cannot get entity property directly'
             );
         }
@@ -138,7 +139,7 @@ class Collection extends \ArrayIterator
     public function getNext()
     {
         if (!is_int($this->key())) {
-            throw new \LogicException("Can't get next element from not numeric ordered collection");
+            throw new LogicException("Can't get next element from not numeric ordered collection");
         }
         if ($this->offsetExists($this->key() + 1)) {
             return $this->offsetGet($this->key() + 1);
@@ -153,7 +154,7 @@ class Collection extends \ArrayIterator
     public function getPrevious()
     {
         if (!is_int($this->key())) {
-            throw new \LogicException("Can't get previous element from not numeric ordered collection");
+            throw new LogicException("Can't get previous element from not numeric ordered collection");
         }
         if ($this->offsetExists($this->key() - 1)) {
             return $this->offsetGet($this->key() - 1);
