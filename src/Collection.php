@@ -3,6 +3,7 @@
 use Closure;
 use LogicException;
 use RuntimeException;
+use OutOfBoundsException;
 
 class Collection extends \ArrayIterator
 {
@@ -143,8 +144,11 @@ class Collection extends \ArrayIterator
         if (!is_int($this->key())) {
             throw new LogicException(sprintf("Can't get element moved by %s as current key is not numeric", $offset));
         }
-        if ($this->offsetExists($this->key() + $offset)) {
-            return $this->offsetGet($this->key() + $offset);
+        $offset = $this->key() + $offset;
+        if ($this->offsetExists($offset)) {
+            return $this->offsetGet($offset);
+        } else {
+            throw new OutOfBoundsException(sprintf("Invalid offset given '%s'", $offset));
         }
     }
 

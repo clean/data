@@ -40,6 +40,9 @@ class TestCase extends \PHPUnit_Framework_TestCase
         $this->collectionNonNumeric->getPrevious();
     }
 
+    /**
+     * @expectedException \OutOfBoundsException
+     */
     public function testPreviousWhenIndexIsOnBegining()
     {
         $this->assertEquals(null, $this->collectionNumeric->getPrevious());
