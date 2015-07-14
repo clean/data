@@ -477,64 +477,12 @@ class Collection extends \ArrayIterator
         return array_values($values);
     }
 
-    /**
-     * Order collection elements by some property
-     *
-     * @param string $element
-     * @param string $order desc|asc
-     * @access public
-     * @return Collection
-     */
-    public function orderBy($element, $order = 'asc')
-    {
-        $this->uasort(
-            function ($a, $b) use ($element, $order) {
-                $m = ($order == 'desc') ? -1 : 1;
-
-                if (is_object($a) && is_object($b)) {
-                    if ($element instanceof \Closure) {
-                        $valueA = $element($a);
-                        $valueB = $element($b);
-                    } else {
-                        $valueA = $a->$element;
-                        $valueB = $b->$element;
-                    }
-                } elseif (is_array($a) && is_array($b)) {
-                    $valueA = $a[$element];
-                    $valueB = $b[$element];
-                } else {
-                    throw new \InvalidArgumentException(
-                        sprintf("Collection can't be sorted it contains invalid data type: %s", gettype($a))
-                    );
-                }
-                return  ($valueA > $valueB ? 1 * $m : ($valueA < $valueB ? -1 * $m : 0));
-            }
-        );
-        $this->rewind();
-        return $this;
-    }
-
-    public function orderTree($childProperty, $parentProperty)
-    {
-        $this->uasort(
-            function ($a, $b) use ($childProperty, $parentProperty) {
-                if (!$a->$parentProperty) {
-                    return -1;
-                }
-
-                return ($a->$childProperty == $b->$parentProperty) ? -1 : 1;
-            }
-        );
-        $this->rewind();
-        return $this;
-    }
-
     public function groupByField($name, $callback = null)
     {
         $collection = $this->getNewCollection();
         foreach ($this as $entity) {
-            if ($entity->$name === null) {
-                continue; //when entity dosen't have set property with this name it will be omitted
+            if (!isset($entity->$name) || $entity->$name === null) {
+                continue; //when entity dosen't have set property it will be omitted
             }
 
             $value = $entity->$name;
@@ -546,46 +494,6 @@ class Collection extends \ArrayIterator
                 $collection[$value] = $this->getNewCollection();
             }
             $collection[$value]->append($entity);
-        }
-        return $collection;
-    }
-
-    public function filterBy($field, $value, $operator = '=')
-    {
-        $collection = $this->getNewCollection();
-
-        $arrayValue = is_array($value) ? $value : array($value);
-
-        foreach ($this as $key => $entity) {
-            if ($operator == '=' || $operator == '~') {
-                if (in_array($entity->$field, $arrayValue, ($operator == '=') ? true : false)) {
-                    $collection[$key] = $entity;
-                }
-            } elseif ($operator == '!=') {
-                if (!in_array($entity->$field, $arrayValue, true)) {
-                    $collection[$key] = $entity;
-                }
-            } elseif ($operator == '>') {
-                if ($entity->$field > $value) {
-                    $collection[$key] = $entity;
-                }
-            } elseif ($operator == '>=') {
-                if ($entity->$field >= $value) {
-                    $collection[$key] = $entity;
-                }
-            } elseif ($operator == '<') {
-                if ($entity->$field < $value) {
-                    $collection[$key] = $entity;
-                }
-            } elseif ($operator == '<=') {
-                if ($entity->$field <= $value) {
-                    $collection[$key] = $entity;
-                }
-            } else {
-                throw new \InvalidArgumentException(
-                    sprintf('Invalid operator used: %s', $operator)
-                );
-            }
         }
         return $collection;
     }
