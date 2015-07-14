@@ -37,7 +37,8 @@ class TestCase extends \PHPUnit_Framework_TestCase
      */
     public function testIfPreviousIsNotPossibleOnNonNumericKeys()
     {
-        $this->collectionNonNumeric->getPrevious();
+        $this->collectionNonNumeric->seek(1);
+        $data = $this->collectionNonNumeric->getPrevious();
     }
 
     /**
@@ -45,7 +46,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
      */
     public function testPreviousWhenIndexIsOnBegining()
     {
-        $this->assertEquals(null, $this->collectionNumeric->getPrevious());
+        $this->collectionNumeric->getPrevious();
     }
 
     public function testPrevious()
