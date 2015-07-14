@@ -444,7 +444,7 @@ class Collection extends \ArrayIterator
      */
     public function walk(Closure $callback)
     {
-        foreach ($this as &$entity) {
+        foreach ($this as $entity) {
             $callback($entity);
         }
 
