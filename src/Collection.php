@@ -132,18 +132,30 @@ class Collection extends \ArrayIterator
     }
 
     /**
+     * Returns element moved by offset from the current key
+     *
+     * @param ineger $offset offset
+     *
+     * @return Entity
+     */
+    private function getElementMovedByOffset($offset)
+    {
+        if (!is_int($this->key())) {
+            throw new LogicException(sprintf("Can't get element moved by %s as current key is not numeric", $offset));
+        }
+        if ($this->offsetExists($this->key() + $offset)) {
+            return $this->offsetGet($this->key() + $offset);
+        }
+    }
+
+    /**
      * Returns next entity from collection
      *
      * @return Entity
      */
     public function getNext()
     {
-        if (!is_int($this->key())) {
-            throw new LogicException("Can't get next element from not numeric ordered collection");
-        }
-        if ($this->offsetExists($this->key() + 1)) {
-            return $this->offsetGet($this->key() + 1);
-        }
+        return $this->getElementMovedByOffset(1);
     }
 
     /**
@@ -153,12 +165,7 @@ class Collection extends \ArrayIterator
      */
     public function getPrevious()
     {
-        if (!is_int($this->key())) {
-            throw new LogicException("Can't get previous element from not numeric ordered collection");
-        }
-        if ($this->offsetExists($this->key() - 1)) {
-            return $this->offsetGet($this->key() - 1);
-        }
+        return $this->getElementMovedByOffset(-1);
     }
 
     /**
