@@ -66,22 +66,22 @@ class Collection extends \ArrayIterator
 
     public function __call($name, $args)
     {
-        if ($this->count() > 1) {
-            throw new LogicException(
-                'Collection has more then one element, you cannot call entity method directly'
-            );
+        switch ($this->count()) {
+            case 0:
+                throw new LogicException('Cannot operate on empty collection');
+            case 1:
+                $entity = $this->first();
+                if (!method_exists($entity, $name)) {
+                    throw new RuntimeException(
+                        sprintf("Class %s does not have a method '%s'", get_class($entity), $name)
+                    );
+                }
+                return call_user_func_array([$entity, $name], $args);
+            default:
+                throw new LogicException(
+                    'Collection has more then one element, you cannot call entity method directly'
+                );
         }
-        $current = $this->first();
-
-        if (!$current) {
-            throw new LogicException('Cannot operate on empty collection');
-        }
-
-        if (!method_exists($current, $name)) {
-            throw new RuntimeException(sprintf("Class %s does not have a method '%s'", get_class($current), $name));
-        }
-
-        return call_user_func_array([$current, $name], $args);
     }
 
     /**
