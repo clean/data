@@ -134,7 +134,7 @@ class Collection extends \ArrayIterator
     /**
      * Returns element moved by offset from the current key
      *
-     * @param ineger $offset offset
+     * @param integer $offset offset
      *
      * @return Entity
      */
@@ -220,7 +220,7 @@ class Collection extends \ArrayIterator
      * @param mixed $value value to compare
      * @param bool $strict compare value and type of property
      *
-     * @return void
+     * @return integer|string|false
      */
     public function search($field, $value, $strict = false)
     {
