@@ -489,7 +489,48 @@ class Collection extends \ArrayIterator
         return array_values($values);
     }
 
-    public function groupByField($name, $callback = null)
+    /**
+     * Bind two collections
+     *
+     * @param Collection $collection collection
+     * @param array $keyMap The name of the key to compare with from target Collection
+     * @param string $propertyName The nae of new property that will be created in source Collection
+     *
+     * @return Collection
+     */
+    public function bindCollection(Collection $collection, array $compareKeys, $propertyName)
+    {
+        $reflection = new \ReflectionClass($collection);
+
+        $fromKey = key($compareKeys);
+        $toKey = $compareKeys[$fromKey];
+
+        $collection = $collection->groupByField($fromKey);
+
+        foreach ($this as $entity) {
+            if (!isset($entity->$propertyName)) {
+                $entity->$propertyName = new $reflection->name;
+            }
+
+            if (($value = $entity->$toKey) === null) {
+                continue; //do not try to bind to null value
+            }
+
+            if (isset($collection[$value])) {
+                $entity->$propertyName->append($collection[$value]);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * Group entities inside collection to sepearate Collections
+     *
+     * @param string $name Property name to group by
+     *
+     * @return Collection
+     */
+    private function groupByField($name)
     {
         $collection = $this->getNewCollection();
         foreach ($this as $entity) {
@@ -498,9 +539,6 @@ class Collection extends \ArrayIterator
             }
 
             $value = $entity->$name;
-            if (is_callable($callback)) {
-                $value = $callback($value);
-            }
 
             if (!isset($collection[$value])) {
                 $collection[$value] = $this->getNewCollection();
@@ -508,20 +546,5 @@ class Collection extends \ArrayIterator
             $collection[$value]->append($entity);
         }
         return $collection;
-    }
-
-    public function bindCollection(Collection $collection, $targetKey, $propertyName)
-    {
-        $reflection = new \ReflectionClass($collection);
-        foreach ($this as $entity) {
-            if (!isset($entity->$propertyName)) {
-                $entity->$propertyName = new $reflection->name;
-            }
-
-            if ($entity->$targetKey !== null && isset($collection[$entity->$targetKey])) {
-                $entity->$propertyName->append($collection[$entity->$targetKey]);
-            }
-        }
-        return $this;
     }
 }
