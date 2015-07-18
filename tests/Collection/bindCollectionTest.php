@@ -19,6 +19,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
             new Entity(['id2' => 1]),
             new Entity(['id2' => 5]),
             new Entity(['id2' => 1]),
+            new Entity(['id2' => null]),
         ]);
 
         $one->bindCollection($two, ['id2' => 'id'], 'two');
