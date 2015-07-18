@@ -1,27 +1,35 @@
 <?php namespace Test\Clean\Data\Collection\NextAndPrevious;
 
+use Clean\Data\Entity;
 use Clean\Data\Collection;
 
 class TestCase extends \PHPUnit_Framework_TestCase
 {
     private $collectionNumeric;
     private $collectionNonNumeric;
+    private $e1;
+    private $e2;
+    private $e3;
 
     public function setup()
     {
-        $this->collectionNumeric = new Collection([1,2,3]);
+        $this->collectionNumeric = new Collection([
+            $this->e1 = new Entity(['id' => 1]),
+            $this->e2 = new Entity(['id' => 2]),
+            $this->e3 = new Entity(['id' => 3]),
+        ]);
 
         $this->collectionNonNumeric = new Collection();
-        $this->collectionNonNumeric[0] = 0;
-        $this->collectionNonNumeric['a'] = 'a';
-        $this->collectionNonNumeric[1] = 1;
+        $this->collectionNonNumeric[0] = $this->e1;
+        $this->collectionNonNumeric['a'] = $this->e2;
+        $this->collectionNonNumeric[1] = $this->e3;
     }
 
     public function testIfNextIsNotChangingInternalPointerOfCurrentOffsetIndex()
     {
         $collection = $this->collectionNumeric;
-        $this->assertEquals(2, $collection->getNext());
-        $this->assertEquals(2, $collection->getNext());
+        $this->assertEquals($this->e2, $collection->getNext());
+        $this->assertEquals($this->e2, $collection->getNext());
     }
 
     /**
@@ -52,9 +60,9 @@ class TestCase extends \PHPUnit_Framework_TestCase
     public function testPrevious()
     {
         $this->collectionNumeric->seek(1);
-        $this->assertEquals(1, $this->collectionNumeric->getPrevious());
+        $this->assertEquals($this->e1, $this->collectionNumeric->getPrevious());
 
         $this->collectionNumeric->seek(2);
-        $this->assertEquals(2, $this->collectionNumeric->getPrevious());
+        $this->assertEquals($this->e2, $this->collectionNumeric->getPrevious());
     }
 }
