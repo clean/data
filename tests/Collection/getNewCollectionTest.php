@@ -12,10 +12,10 @@ class TestCase extends \PHPUnit_Framework_TestCase
 
     public function testGettingNewCollection()
     {
-        $collection = new TestCollection([1,2,3]);
+        $collection = new TestCollection();
         $this->assertInstanceOf(TestCollection::class, $collection->getNewCollection());
 
-        $collection = new Collection([1,2,3]);
+        $collection = new Collection();
         $this->assertInstanceOf(Collection::class, $collection->getNewCollection());
     }
 }

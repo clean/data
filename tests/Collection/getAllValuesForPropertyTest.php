@@ -14,7 +14,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
             new Entity(['id' => null]),
             new Entity(['id' => 3, 'foo' => 1]),
             new Entity(['id' => $c1 = new Collection()]),
-            new Entity(['id' => $c2 = new Collection(['id' => 1.1])]),
+            new Entity(['id' => $c2 = new Collection(['id' => new Entity()])]),
         ]);
 
         $this->assertEquals([1,2,3, $c2], $collection->getAllValuesForProperty('id'));

@@ -3,7 +3,7 @@
 use Clean\Data\Collection;
 use Clean\Data\Entity;
 
-class TestEntity
+class TestEntity extends Entity
 {
     public $fooProperty = 'foo';
 

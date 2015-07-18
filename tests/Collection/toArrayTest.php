@@ -11,36 +11,13 @@ class TestCase extends \PHPUnit_Framework_TestCase
         $entity2 = new Entity(['two' => 2]);
         $entity3 = new Entity(['three' => 3]);
 
-        $collection = new Collection([$entity1, $entity2, $entity3, 1, 2, 3]);
+        $collection = new Collection([$entity1, $entity2, $entity3]);
 
         $this->assertEquals(
             [
                 ['one' => 1],
                 ['two' => 2],
                 ['three' => 3],
-                1,
-                2,
-                3,
-            ],
-            $collection->toArray()
-        );
-
-        $collection = new Collection([$entity1, $collection, 1,2,3]);
-
-        $this->assertEquals(
-            [
-                ['one' => 1],
-                [
-                    ['one' => 1],
-                    ['two' => 2],
-                    ['three' => 3],
-                    1,
-                    2,
-                    3,
-                ],
-                1,
-                2,
-                3,
             ],
             $collection->toArray()
         );

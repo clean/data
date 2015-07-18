@@ -1,6 +1,7 @@
 <?php namespace Test\Clean\Data\Collection\EmptyState;
 
 use Clean\Data\Collection;
+use Clean\Data\Entity;
 
 class TestCase extends \PHPUnit_Framework_TestCase
 {
@@ -10,20 +11,14 @@ class TestCase extends \PHPUnit_Framework_TestCase
     {
         $collection = new Collection();
         $this->assertTrue($collection->isEmpty());
-
-        $collection = new Collection([]);
-        $this->assertTrue($collection->isEmpty());
-
-        $collection = new Collection(null);
-        $this->assertTrue($collection->isEmpty());
     }
 
     public function testIsNotEmpty()
     {
-        $collection = new Collection(['a' => 1, 'b' => 2]);
-        $this->assertTrue($collection->isNotEmpty());
+        $e1 = new Entity(['id'=>1]);
+        $e2 = new Entity(['id'=>2]);
 
-        $collection = new Collection([null]);
+        $collection = new Collection([$e1, $e2]);
         $this->assertTrue($collection->isNotEmpty());
     }
 }
