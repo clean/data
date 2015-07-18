@@ -471,11 +471,8 @@ class Collection extends \ArrayIterator
             }
 
             $value = $entity->$name;
-            if ($value instanceof Collection && $value->isEmpty()) {
-                continue;
-            }
 
-            if (null === $value) {
+            if ($value === null || $value instanceof Collection && $value->isEmpty()) {
                 continue;
             }
 
