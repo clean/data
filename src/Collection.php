@@ -2,6 +2,7 @@
 
 use Closure;
 use LogicException;
+use InvalidArgumentException;
 use RuntimeException;
 use OutOfBoundsException;
 
@@ -38,6 +39,9 @@ class Collection extends \ArrayIterator
     {
         if (is_array($data) || $data instanceof \Traversable) {
             foreach ($data as $entity) {
+                if (!$entity instanceof Entity) {
+                    throw new InvalidArgumentException('Collection can contain only Entities class');
+                }
                 parent::append($entity);
             }
         } else {
