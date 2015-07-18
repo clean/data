@@ -490,7 +490,7 @@ class Collection extends \ArrayIterator
      * Bind two collections
      *
      * @param Collection $collection collection
-     * @param array $keyMap The name of the key to compare with from target Collection
+     * @param array $compareKeys The name of the key to compare with from target Collection
      * @param string $propertyName The nae of new property that will be created in source Collection
      *
      * @return Collection
