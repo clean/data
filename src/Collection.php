@@ -368,17 +368,9 @@ class Collection extends \ArrayIterator
     public function toArray()
     {
         $result = [];
-
         foreach ($this as $entity) {
-            if ($entity instanceof Entity) {
-                $result[] = (array)$entity;
-            } elseif (is_scalar($entity)) {
-                $result[] = $entity;
-            } elseif ($entity instanceof Collection) {
-                $result[] = $entity->toArray();
-            }
+            $result[] = (array)$entity;
         }
-
         return $result;
     }
 
