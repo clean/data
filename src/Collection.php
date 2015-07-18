@@ -29,7 +29,7 @@ class Collection extends \ArrayIterator
     /**
      * Append entities to collection
      *
-     * @param Traversable $data
+     * @param Entity|Traversable|array $data entity or list of entities to append
      * @access public
      *
      * @return Collection
@@ -37,8 +37,8 @@ class Collection extends \ArrayIterator
     public function append($data)
     {
         if (is_array($data) || $data instanceof \Traversable) {
-            foreach ($data as $value) {
-                parent::append($value);
+            foreach ($data as $entity) {
+                parent::append($entity);
             }
         } else {
             parent::append($data);
