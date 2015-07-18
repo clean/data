@@ -12,6 +12,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
             new Entity(['id' => 2]),
             new Entity(['id' => 1]),
             new Entity(['id' => null]),
+            new Entity(['noid' => 1]),
         ]);
         
         $two = new Collection([

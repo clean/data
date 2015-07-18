@@ -509,8 +509,8 @@ class Collection extends \ArrayIterator
                 $entity->$propertyName = new $reflection->name;
             }
 
-            if (($value = $entity->$toKey) === null) {
-                continue; //do not try to bind to null value
+            if (!isset($entity->$toKey) || ($value = $entity->$toKey) === null) {
+                continue; //do not try to bind to null or non existing property
             }
 
             if (isset($collection[$value])) {
