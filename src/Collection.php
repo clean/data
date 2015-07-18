@@ -144,12 +144,12 @@ class Collection extends \ArrayIterator
         if (!is_int($this->key())) {
             throw new LogicException(sprintf("Can't get element moved by %s as current key is not numeric", $offset));
         }
-        $offset = $this->key() + $offset;
-        if ($this->offsetExists($offset)) {
-            return $this->offsetGet($offset);
-        } else {
-            throw new OutOfBoundsException(sprintf("Invalid offset given '%s'", $offset));
-        }
+        $oldPosition = $this->key();
+        $newPosition = $oldPosition + $offset;
+        $this->seek($newPosition);
+        $value = $this->current();
+        $this->seek($oldPosition);
+        return $value;
     }
 
     /**
