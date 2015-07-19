@@ -38,4 +38,24 @@ class TestCase extends \PHPUnit_Framework_TestCase
             $collection->toArray()
         );
     }
+
+    public function invalidEntities()
+    {
+        return [
+            [ [null] ],
+            [ [1,2,3] ],
+            [ ['string'] ],
+            [ [new \stdClass] ],
+            [ [new Collection] ],
+        ];
+    }
+
+    /**
+     * @dataProvider invalidEntities
+     * @expectedException \InvalidArgumentException
+     */
+    public function testAppendingInvalidElement($invalid)
+    {
+        $collection = new Collection($invalid);
+    }
 }
