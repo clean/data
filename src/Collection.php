@@ -469,20 +469,15 @@ class Collection extends \ArrayIterator
     {
         $values = [];
         foreach ($this as $entity) {
-            if (!isset($entity->$name)) {
-                continue;
-            }
-
-            $value = $entity->$name;
-
-            if ($value === null || $value instanceof Collection && $value->isEmpty()) {
-                continue;
-            }
-
-            if (is_scalar($value)) {
-                $values[$value] = $value;
-            } else {
-                $values[] = $value;
+            if (isset($entity->$name)) {
+                $value = $entity->$name;
+                if (!($value === null || $value instanceof Collection && $value->isEmpty())) {
+                    if (is_scalar($value)) {
+                        $values[$value] = $value;
+                    } else {
+                        $values[] = $value;
+                    }
+                }
             }
         }
 
