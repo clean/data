@@ -358,7 +358,7 @@ class Collection extends \ArrayIterator
     /**
      * Unset values from an offset or offsets
      *
-     * @param mixed $indexes indexes
+     * @param string|array $index Offsets to remove
      *
      * @return Collection
      */
