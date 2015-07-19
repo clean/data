@@ -15,6 +15,6 @@ via [Composer](https://packagist.org/packages/clean/data):
 
 ```json
 "require": {
-  "clean/data": "dev-master"
+  "clean/data": "2.0.*"
 }
 ```
