@@ -270,11 +270,7 @@ class Collection extends \ArrayIterator
                 $offsetToRemove[] = $offset;
             }
         }
-
-        foreach ($offsetToRemove as $offset) {
-            $this->offsetUnset($offset);
-        }
-
+        $this->offsetUnset($offsetToRemove);
         return $this;
     }
 
@@ -290,7 +286,6 @@ class Collection extends \ArrayIterator
         foreach ($this as $key => $entity) {
             $keys[] = $key;
         }
-
         return $keys;
     }
 
@@ -298,6 +293,8 @@ class Collection extends \ArrayIterator
      * Splits collection into chunks
      *
      * @param integer $size
+     *
+     * @return Collection
      */
     public function chunk($size)
     {
@@ -320,6 +317,8 @@ class Collection extends \ArrayIterator
      *
      * @param integer $offset
      * @param integer|null $length
+     *
+     * @return Collection
      */
     public function slice($offset, $length = null)
     {
@@ -352,10 +351,22 @@ class Collection extends \ArrayIterator
      */
     public function clear()
     {
-        $keys = $this->getKeys();
+        $this->offsetUnset($this->getKeys());
+        return $this;
+    }
 
-        foreach ($keys as $key) {
-            $this->offsetUnset($key);
+    /**
+     * Unset values from an offset or offsets
+     *
+     * @param mixed $indexes indexes
+     *
+     * @return Collection
+     */
+    public function offsetUnset($index)
+    {
+        $index = is_array($index) ? $index : (array)$index;
+        foreach ($index as $key) {
+            parent::offsetUnset($key);
         }
         return $this;
     }
@@ -410,11 +421,7 @@ class Collection extends \ArrayIterator
                 $values[] = $entity->$propertyName;
             }
         }
-
-        foreach ($keys as $key) {
-            $this->offsetUnset($key);
-        }
-
+        $this->offsetUnset($keys);
         return $this;
     }
 
