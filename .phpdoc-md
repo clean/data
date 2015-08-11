@@ -1,0 +1,10 @@
+<?php
+return (object)[
+    'rootNamespace' => 'Clean\Data',
+    'destDirectory' => 'docs',
+    'format' => 'github',
+    'classes' => [
+        '\Clean\Data\Entity',
+        '\Clean\Data\Collection',
+    ],
+];
