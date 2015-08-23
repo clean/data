@@ -8,6 +8,11 @@ use OutOfBoundsException;
 
 class Collection extends \ArrayIterator
 {
+    /**
+     * Constructs Collection object
+     *
+     * @param mixed $data data
+     */
     public function __construct($data = null)
     {
         parent::__construct([]);

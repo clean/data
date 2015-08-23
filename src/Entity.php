@@ -9,8 +9,6 @@ class Entity
      * __construct
      *
      * @param mixed $data Traversable data (array,stdClass,ArrayIterator)
-     *
-     * @return self
      */
     final public function __construct($data = [])
     {
