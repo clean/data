@@ -34,7 +34,7 @@ class Collection extends \ArrayIterator
     /**
      * Append entities to collection
      *
-     * @param Entity|Traversable|array $data entity or list of entities to append
+     * @param Entity|Collection|Traversable|array $data entity or list of entities to append
      * @access public
      *
      * @return Collection
