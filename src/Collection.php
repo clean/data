@@ -1,10 +1,9 @@
 <?php namespace Clean\Data;
 
 use Closure;
-use LogicException;
 use InvalidArgumentException;
+use LogicException;
 use RuntimeException;
-use OutOfBoundsException;
 
 class Collection extends \ArrayIterator
 {
