@@ -278,6 +278,24 @@ class Collection extends \ArrayIterator
         return $this;
     }
 
+    /**
+     * Get collection of entities matching criteria given in callback
+     * and return new instance of object
+     *
+     * @param Closure $callback
+     * @return Collection
+     */
+    public function getBy(\Closure $callback)
+    {
+        $instanceCopy = $this->getNewCollection();
+        foreach ($this as $offset => $entity) {
+            if ($callback($entity)) {
+                $instanceCopy->append($entity);
+            }
+        }
+
+        return $instanceCopy;
+    }
 
     /**
      * Returns collection keys
