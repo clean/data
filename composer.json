@@ -19,6 +19,6 @@
     },
     "scripts": {
         "test": "vendor/bin/phpunit",
-        "phpdoc": "vendor/bin/phpdoc"
+        "phpdoc": "vendor/bin/phpdoc-md"
     }
 }
