@@ -1,8 +1,9 @@
 # Clean\Data
 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/clean/data/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/clean/data/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/clean/data/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/clean/data/?branch=master)
 [![Build Status](https://travis-ci.org/clean/data.svg?branch=master)](https://travis-ci.org/clean/data)
+[![Code Climate](https://codeclimate.com/github/clean/data/badges/gpa.svg)](https://codeclimate.com/github/clean/data)
+[![Test Coverage](https://codeclimate.com/github/clean/data/badges/coverage.svg)](https://codeclimate.com/github/clean/data/coverage)
+[![Issue Count](https://codeclimate.com/github/clean/data/badges/issue_count.svg)](https://codeclimate.com/github/clean/data)
 
 Set of classes for holding data (entity, collection)
 
