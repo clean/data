@@ -12,6 +12,7 @@
 |[prepend](#collectionprepend)|Prepand entity to the begining of collection|
 |[__call](#collection__call)||
 |[__get](#collection__get)|Returns direct value from entity when collection has only one element|
+|[__isset](#collection__isset)|Returns isset on entity property when collection has only one element|
 |[first](#collectionfirst)|Returns first entity from collection|
 |[last](#collectionlast)|Returns last entity from collection|
 |[getNext](#collectiongetnext)|Returns next entity from collection|
@@ -186,6 +187,31 @@ public __get (string $name)
 **Description**
 
 Returns direct value from entity when collection has only one element 
+
+ 
+
+**Parameters**
+
+`(string) $name`
+: property name  
+
+**Return Values**
+
+`mixed`
+
+
+
+
+
+### Collection::__isset  
+
+```php
+public __isset (string $name)
+```
+
+**Description**
+
+Returns isset on entity property when collection has only one element 
 
  
 
