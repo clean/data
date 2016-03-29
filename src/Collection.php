@@ -104,6 +104,23 @@ class Collection extends \ArrayIterator
      */
     public function __get($name)
     {
+        if (!$this->__isset($name)) {
+            return null;
+        }
+        return $this->first()->$name;
+    }
+
+    /**
+     * Returns isset on entity property when collection has only one element
+     *
+     * @param string $name property name
+     *
+     * @throws LogicException when collection has more then one element
+     *
+     * @return mixed
+     */
+    public function __isset($name)
+    {
         if ($this->count() > 1) {
             throw new LogicException(
                 'Collection has more then one element, you cannot get entity property directly'
@@ -111,9 +128,9 @@ class Collection extends \ArrayIterator
         }
         $current = $this->first();
         if (!$current) {
-            return null;
+            return false;
         }
-        return $current->$name;
+        return isset($current->$name);
     }
 
     /**
