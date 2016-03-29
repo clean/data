@@ -13,9 +13,3 @@ Set of classes for holding data (entity, collection)
 ## Installation
 
 via [Composer](https://packagist.org/packages/clean/data):
-
-```json
-"require": {
-  "clean/data": "2.0.*"
-}
-```
