@@ -297,7 +297,12 @@ class Collection extends \ArrayIterator
 
     /**
      * Get collection of entities matching criteria given in callback
-     * and return new instance of object
+     *
+     * Usage example:
+     *
+     * $colleciton->getBy(function($entity) {
+     *    return $entity->name == 'John';
+     * });
      *
      * @param Closure $callback
      * @return Collection
@@ -376,6 +381,23 @@ class Collection extends \ArrayIterator
         return $collection;
     }
 
+    /**
+     * Returns collection of collections created by spliting first Collection to a parts
+     *
+     * Example:
+     *
+     * When collection has 10 element and we would like to split to 3 separate collections:
+     *
+     * $splitted = $collection->split(3);
+     * $splitted->count(); // = 3
+     * $splitted[0]->count(); // = 4
+     * $splitted[1]->count(); // = 4
+     * $splitted[3]->count(); // = 2
+     * 
+     * @param integer $parts
+     * 
+     * @return Collection
+     */
     public function split($parts)
     {
         $elementsPerChunk = ceil($this->count() / $parts);
