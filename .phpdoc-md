@@ -3,6 +3,7 @@ return (object)[
     'rootNamespace' => 'Clean\Data',
     'destDirectory' => 'docs',
     'format' => 'github',
+    'sortMethods' => true,
     'classes' => [
         '\Clean\Data\Entity',
         '\Clean\Data\Collection',
