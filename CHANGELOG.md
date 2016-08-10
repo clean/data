@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.2
+
+- bugfix: Collection::getElementMovedByOffset is not throwing exception for non-numeric (indexed) collection
+
 ## 2.2.1
 
 - update phpdoc comments
