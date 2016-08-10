@@ -172,6 +172,9 @@ class Collection extends \ArrayIterator
         $oldPosition = $this->key();
         $newPosition = $oldPosition + $offset;
         $this->seek($newPosition);
+        if (!is_int($this->key())) {
+            throw new LogicException(sprintf("Can't get element moved by %s as next key is not numeric", $offset));
+        }
         $value = $this->current();
         $this->seek($oldPosition);
         return $value;
