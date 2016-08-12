@@ -2,28 +2,28 @@
 
 
 
+## Implements:
+Countable, Serializable, SeekableIterator, ArrayAccess, Traversable, Iterator
+
+## Extend:
+
+ArrayIterator
+
 ## Methods
 
 | Name | Description |
 |------|-------------|
 |[__call](#collection__call)||
-|[__construct](#collection__construct)|Constructs Collection object|
 |[__get](#collection__get)|Returns direct value from entity when collection has only one element|
 |[__isset](#collection__isset)|Returns isset on entity property when collection has only one element|
-|[append](#collectionappend)|Append entities to collection|
-|[asort](#collectionasort)||
 |[bindCollection](#collectionbindcollection)|Bind two collections|
 |[chunk](#collectionchunk)|Splits collection into chunks|
 |[clear](#collectionclear)|Remove all entities form collection|
-|[count](#collectioncount)||
-|[current](#collectioncurrent)||
 |[distinctOn](#collectiondistincton)|Eliminates entities that contains the same value in given property|
 |[filter](#collectionfilter)|Filter collection from entities not matching criteria given in callback|
 |[first](#collectionfirst)|Returns first entity from collection|
 |[getAllValuesForProperty](#collectiongetallvaluesforproperty)|Return values from all entities from given property|
-|[getArrayCopy](#collectiongetarraycopy)||
 |[getBy](#collectiongetby)|Get collection of entities matching criteria given in callback|
-|[getFlags](#collectiongetflags)||
 |[getKeys](#collectiongetkeys)|Returns collection keys|
 |[getNewCollection](#collectiongetnewcollection)|Returns new instance of collection of the same type|
 |[getNext](#collectiongetnext)|Returns next entity from collection|
@@ -32,42 +32,55 @@
 |[has](#collectionhas)|Checks if collection has entity with field equals to given value|
 |[isEmpty](#collectionisempty)|Returns true if collection is empty|
 |[isNotEmpty](#collectionisnotempty)|Returns true if collection is not empty|
-|[key](#collectionkey)||
-|[ksort](#collectionksort)||
 |[last](#collectionlast)|Returns last entity from collection|
-|[natcasesort](#collectionnatcasesort)||
-|[natsort](#collectionnatsort)||
-|[next](#collectionnext)||
-|[offsetExists](#collectionoffsetexists)||
-|[offsetGet](#collectionoffsetget)||
-|[offsetSet](#collectionoffsetset)||
-|[offsetUnset](#collectionoffsetunset)|Unset values from an offset or offsets|
 |[prepend](#collectionprepend)|Prepand entity to the begining of collection|
 |[reindex](#collectionreindex)|Renumber collection keys (from zero to n), keeping values in the same place|
 |[reverse](#collectionreverse)|Return an collection with elements in reverse order|
-|[rewind](#collectionrewind)||
 |[search](#collectionsearch)|Search for an element with given property and value|
-|[seek](#collectionseek)||
-|[serialize](#collectionserialize)||
-|[setFlags](#collectionsetflags)||
 |[shift](#collectionshift)|Shift an entity off the begining of collection|
 |[slice](#collectionslice)|Extract a slice of the collection|
 |[split](#collectionsplit)|Returns collection of collections created by spliting first Collection to a parts|
 |[toArray](#collectiontoarray)|Tranform collection to array|
-|[uasort](#collectionuasort)||
-|[uksort](#collectionuksort)||
-|[unserialize](#collectionunserialize)||
-|[valid](#collectionvalid)||
 |[walk](#collectionwalk)|Apply a user supplied function to every member of an Collection|
+
+## Inherited methods
+
+| Name | Description |
+|------|-------------|
+|__construct|-|
+|append|-|
+|asort|-|
+|count|-|
+|current|-|
+|getArrayCopy|-|
+|getFlags|-|
+|key|-|
+|ksort|-|
+|natcasesort|-|
+|natsort|-|
+|next|-|
+|offsetExists|-|
+|offsetGet|-|
+|offsetSet|-|
+|offsetUnset|-|
+|rewind|-|
+|seek|-|
+|serialize|-|
+|setFlags|-|
+|uasort|-|
+|uksort|-|
+|unserialize|-|
+|valid|-|
+
 
 
 ### Collection::__call  
 
+**Description**
+
 ```php
 public __call (void)
 ```
-
-**Description**
 
  
 
@@ -82,35 +95,13 @@ public __call (void)
 
 
 
-### Collection::__construct  
-
-```php
-public __construct (mixed $data)
-```
+### Collection::__get  
 
 **Description**
-
-Constructs Collection object 
-
- 
-
-**Parameters**
-
-`(mixed) $data`
-: data  
-
-**Return Values**
-
-
-
-
-### Collection::__get  
 
 ```php
 public __get (string $name)
 ```
-
-**Description**
 
 Returns direct value from entity when collection has only one element 
 
@@ -118,7 +109,7 @@ Returns direct value from entity when collection has only one element
 
 **Parameters**
 
-`(string) $name`
+* `(string) $name`
 : property name  
 
 **Return Values**
@@ -131,11 +122,11 @@ Returns direct value from entity when collection has only one element
 
 ### Collection::__isset  
 
+**Description**
+
 ```php
 public __isset (string $name)
 ```
-
-**Description**
 
 Returns isset on entity property when collection has only one element 
 
@@ -143,7 +134,7 @@ Returns isset on entity property when collection has only one element
 
 **Parameters**
 
-`(string) $name`
+* `(string) $name`
 : property name  
 
 **Return Values**
@@ -154,59 +145,13 @@ Returns isset on entity property when collection has only one element
 
 
 
-### Collection::append  
-
-```php
-public append (\Entity|\Collection|\Traversable|array $data)
-```
-
-**Description**
-
-Append entities to collection 
-
- 
-
-**Parameters**
-
-`(\Entity|\Collection|\Traversable|array) $data`
-: entity or list of entities to append  
-
-**Return Values**
-
-`\Collection`
-
-
-
-
-
-### Collection::asort  
-
-```php
-public asort (void)
-```
-
-**Description**
-
- 
-
- 
-
-**Parameters**
-
-`This function has no parameters.`
-
-**Return Values**
-
-
-
-
 ### Collection::bindCollection  
+
+**Description**
 
 ```php
 public bindCollection (\Collection $collection, array $compareKeys, string $propertyName)
 ```
-
-**Description**
 
 Bind two collections 
 
@@ -214,11 +159,11 @@ Bind two collections
 
 **Parameters**
 
-`(\Collection) $collection`
+* `(\Collection) $collection`
 : collection  
-`(array) $compareKeys`
+* `(array) $compareKeys`
 : The name of the key to compare with from target Collection  
-`(string) $propertyName`
+* `(string) $propertyName`
 : The nae of new property that will be created in source Collection  
 
 **Return Values**
@@ -231,11 +176,11 @@ Bind two collections
 
 ### Collection::chunk  
 
+**Description**
+
 ```php
 public chunk (integer $size)
 ```
-
-**Description**
 
 Splits collection into chunks 
 
@@ -243,7 +188,7 @@ Splits collection into chunks
 
 **Parameters**
 
-`(integer) $size`
+* `(integer) $size`
 
 **Return Values**
 
@@ -255,11 +200,11 @@ Splits collection into chunks
 
 ### Collection::clear  
 
+**Description**
+
 ```php
 public clear (void)
 ```
-
-**Description**
 
 Remove all entities form collection 
 
@@ -277,55 +222,13 @@ Remove all entities form collection
 
 
 
-### Collection::count  
-
-```php
-public count (void)
-```
-
-**Description**
-
- 
-
- 
-
-**Parameters**
-
-`This function has no parameters.`
-
-**Return Values**
-
-
-
-
-### Collection::current  
-
-```php
-public current (void)
-```
-
-**Description**
-
- 
-
- 
-
-**Parameters**
-
-`This function has no parameters.`
-
-**Return Values**
-
-
-
-
 ### Collection::distinctOn  
+
+**Description**
 
 ```php
 public distinctOn (string $propertyName)
 ```
-
-**Description**
 
 Eliminates entities that contains the same value in given property 
 
@@ -333,7 +236,7 @@ Eliminates entities that contains the same value in given property
 
 **Parameters**
 
-`(string) $propertyName`
+* `(string) $propertyName`
 : Name of the property  
 
 **Return Values**
@@ -346,11 +249,11 @@ Eliminates entities that contains the same value in given property
 
 ### Collection::filter  
 
+**Description**
+
 ```php
 public filter (\Closure $callback)
 ```
-
-**Description**
 
 Filter collection from entities not matching criteria given in callback 
 
@@ -358,7 +261,7 @@ Filter collection from entities not matching criteria given in callback
 
 **Parameters**
 
-`(\Closure) $callback`
+* `(\Closure) $callback`
 : callback  
 
 **Return Values**
@@ -371,11 +274,11 @@ Filter collection from entities not matching criteria given in callback
 
 ### Collection::first  
 
+**Description**
+
 ```php
 public first (void)
 ```
-
-**Description**
 
 Returns first entity from collection 
 
@@ -395,11 +298,11 @@ Returns first entity from collection
 
 ### Collection::getAllValuesForProperty  
 
+**Description**
+
 ```php
 public getAllValuesForProperty (string $name)
 ```
-
-**Description**
 
 Return values from all entities from given property 
 
@@ -407,7 +310,7 @@ Return values from all entities from given property
 
 **Parameters**
 
-`(string) $name`
+* `(string) $name`
 : name  
 
 **Return Values**
@@ -418,34 +321,13 @@ Return values from all entities from given property
 
 
 
-### Collection::getArrayCopy  
-
-```php
-public getArrayCopy (void)
-```
+### Collection::getBy  
 
 **Description**
-
- 
-
- 
-
-**Parameters**
-
-`This function has no parameters.`
-
-**Return Values**
-
-
-
-
-### Collection::getBy  
 
 ```php
 public getBy (\Closure $callback)
 ```
-
-**Description**
 
 Get collection of entities matching criteria given in callback 
 
@@ -457,7 +339,7 @@ $colleciton->getBy(function($entity) {
 
 **Parameters**
 
-`(\Closure) $callback`
+* `(\Closure) $callback`
 
 **Return Values**
 
@@ -467,34 +349,13 @@ $colleciton->getBy(function($entity) {
 
 
 
-### Collection::getFlags  
-
-```php
-public getFlags (void)
-```
+### Collection::getKeys  
 
 **Description**
-
- 
-
- 
-
-**Parameters**
-
-`This function has no parameters.`
-
-**Return Values**
-
-
-
-
-### Collection::getKeys  
 
 ```php
 public getKeys (void)
 ```
-
-**Description**
 
 Returns collection keys 
 
@@ -514,11 +375,11 @@ Returns collection keys
 
 ### Collection::getNewCollection  
 
+**Description**
+
 ```php
 public getNewCollection (void)
 ```
-
-**Description**
 
 Returns new instance of collection of the same type 
 
@@ -538,11 +399,11 @@ Returns new instance of collection of the same type
 
 ### Collection::getNext  
 
+**Description**
+
 ```php
 public getNext (void)
 ```
-
-**Description**
 
 Returns next entity from collection 
 
@@ -562,11 +423,11 @@ Returns next entity from collection
 
 ### Collection::getPrevious  
 
+**Description**
+
 ```php
 public getPrevious (void)
 ```
-
-**Description**
 
 Returns previous entity from collection 
 
@@ -586,11 +447,11 @@ Returns previous entity from collection
 
 ### Collection::getRandom  
 
+**Description**
+
 ```php
 public getRandom (void)
 ```
-
-**Description**
 
 returns random entity from collection 
 
@@ -610,11 +471,11 @@ returns random entity from collection
 
 ### Collection::has  
 
+**Description**
+
 ```php
 public has (string $field, mixed $value)
 ```
-
-**Description**
 
 Checks if collection has entity with field equals to given value 
 
@@ -622,9 +483,9 @@ Checks if collection has entity with field equals to given value
 
 **Parameters**
 
-`(string) $field`
+* `(string) $field`
 : field  
-`(mixed) $value`
+* `(mixed) $value`
 : value  
 
 **Return Values**
@@ -637,11 +498,11 @@ Checks if collection has entity with field equals to given value
 
 ### Collection::isEmpty  
 
+**Description**
+
 ```php
 public isEmpty (void)
 ```
-
-**Description**
 
 Returns true if collection is empty 
 
@@ -661,11 +522,11 @@ Returns true if collection is empty
 
 ### Collection::isNotEmpty  
 
+**Description**
+
 ```php
 public isNotEmpty (void)
 ```
-
-**Description**
 
 Returns true if collection is not empty 
 
@@ -683,55 +544,13 @@ Returns true if collection is not empty
 
 
 
-### Collection::key  
-
-```php
-public key (void)
-```
-
-**Description**
-
- 
-
- 
-
-**Parameters**
-
-`This function has no parameters.`
-
-**Return Values**
-
-
-
-
-### Collection::ksort  
-
-```php
-public ksort (void)
-```
-
-**Description**
-
- 
-
- 
-
-**Parameters**
-
-`This function has no parameters.`
-
-**Return Values**
-
-
-
-
 ### Collection::last  
+
+**Description**
 
 ```php
 public last (void)
 ```
-
-**Description**
 
 Returns last entity from collection 
 
@@ -749,164 +568,13 @@ Returns last entity from collection
 
 
 
-### Collection::natcasesort  
-
-```php
-public natcasesort (void)
-```
-
-**Description**
-
- 
-
- 
-
-**Parameters**
-
-`This function has no parameters.`
-
-**Return Values**
-
-
-
-
-### Collection::natsort  
-
-```php
-public natsort (void)
-```
-
-**Description**
-
- 
-
- 
-
-**Parameters**
-
-`This function has no parameters.`
-
-**Return Values**
-
-
-
-
-### Collection::next  
-
-```php
-public next (void)
-```
-
-**Description**
-
- 
-
- 
-
-**Parameters**
-
-`This function has no parameters.`
-
-**Return Values**
-
-
-
-
-### Collection::offsetExists  
-
-```php
-public offsetExists (void)
-```
-
-**Description**
-
- 
-
- 
-
-**Parameters**
-
-`This function has no parameters.`
-
-**Return Values**
-
-
-
-
-### Collection::offsetGet  
-
-```php
-public offsetGet (void)
-```
-
-**Description**
-
- 
-
- 
-
-**Parameters**
-
-`This function has no parameters.`
-
-**Return Values**
-
-
-
-
-### Collection::offsetSet  
-
-```php
-public offsetSet (void)
-```
-
-**Description**
-
- 
-
- 
-
-**Parameters**
-
-`This function has no parameters.`
-
-**Return Values**
-
-
-
-
-### Collection::offsetUnset  
-
-```php
-public offsetUnset (string|array $index)
-```
-
-**Description**
-
-Unset values from an offset or offsets 
-
- 
-
-**Parameters**
-
-`(string|array) $index`
-: Offsets to remove  
-
-**Return Values**
-
-`\Collection`
-
-
-
-
-
 ### Collection::prepend  
+
+**Description**
 
 ```php
 public prepend (\Entity $entity)
 ```
-
-**Description**
 
 Prepand entity to the begining of collection 
 
@@ -914,7 +582,7 @@ Prepand entity to the begining of collection
 
 **Parameters**
 
-`(\Entity) $entity`
+* `(\Entity) $entity`
 
 **Return Values**
 
@@ -926,11 +594,11 @@ Prepand entity to the begining of collection
 
 ### Collection::reindex  
 
+**Description**
+
 ```php
 public reindex (void)
 ```
-
-**Description**
 
 Renumber collection keys (from zero to n), keeping values in the same place 
 
@@ -950,11 +618,11 @@ Renumber collection keys (from zero to n), keeping values in the same place
 
 ### Collection::reverse  
 
+**Description**
+
 ```php
 public reverse (void)
 ```
-
-**Description**
 
 Return an collection with elements in reverse order 
 
@@ -972,34 +640,13 @@ Return an collection with elements in reverse order
 
 
 
-### Collection::rewind  
-
-```php
-public rewind (void)
-```
+### Collection::search  
 
 **Description**
-
- 
-
- 
-
-**Parameters**
-
-`This function has no parameters.`
-
-**Return Values**
-
-
-
-
-### Collection::search  
 
 ```php
 public search (string $field, mixed $value, bool $strict)
 ```
-
-**Description**
 
 Search for an element with given property and value 
 
@@ -1007,11 +654,11 @@ Search for an element with given property and value
 
 **Parameters**
 
-`(string) $field`
+* `(string) $field`
 : name of property  
-`(mixed) $value`
+* `(mixed) $value`
 : value to compare  
-`(bool) $strict`
+* `(bool) $strict`
 : compare value and type of property  
 
 **Return Values**
@@ -1022,76 +669,13 @@ Search for an element with given property and value
 
 
 
-### Collection::seek  
-
-```php
-public seek (void)
-```
-
-**Description**
-
- 
-
- 
-
-**Parameters**
-
-`This function has no parameters.`
-
-**Return Values**
-
-
-
-
-### Collection::serialize  
-
-```php
-public serialize (void)
-```
-
-**Description**
-
- 
-
- 
-
-**Parameters**
-
-`This function has no parameters.`
-
-**Return Values**
-
-
-
-
-### Collection::setFlags  
-
-```php
-public setFlags (void)
-```
-
-**Description**
-
- 
-
- 
-
-**Parameters**
-
-`This function has no parameters.`
-
-**Return Values**
-
-
-
-
 ### Collection::shift  
+
+**Description**
 
 ```php
 public shift (void)
 ```
-
-**Description**
 
 Shift an entity off the begining of collection 
 
@@ -1111,11 +695,11 @@ Shift an entity off the begining of collection
 
 ### Collection::slice  
 
+**Description**
+
 ```php
 public slice (integer $offset, integer|null $length)
 ```
-
-**Description**
 
 Extract a slice of the collection 
 
@@ -1123,8 +707,8 @@ Extract a slice of the collection
 
 **Parameters**
 
-`(integer) $offset`
-`(integer|null) $length`
+* `(integer) $offset`
+* `(integer|null) $length`
 
 **Return Values**
 
@@ -1136,11 +720,11 @@ Extract a slice of the collection
 
 ### Collection::split  
 
+**Description**
+
 ```php
 public split (integer $parts)
 ```
-
-**Description**
 
 Returns collection of collections created by spliting first Collection to a parts 
 
@@ -1156,7 +740,7 @@ $splitted[3]->count(); // = 2
 
 **Parameters**
 
-`(integer) $parts`
+* `(integer) $parts`
 
 **Return Values**
 
@@ -1168,11 +752,11 @@ $splitted[3]->count(); // = 2
 
 ### Collection::toArray  
 
+**Description**
+
 ```php
 public toArray (void)
 ```
-
-**Description**
 
 Tranform collection to array 
 
@@ -1190,97 +774,13 @@ Tranform collection to array
 
 
 
-### Collection::uasort  
-
-```php
-public uasort (void)
-```
-
-**Description**
-
- 
-
- 
-
-**Parameters**
-
-`This function has no parameters.`
-
-**Return Values**
-
-
-
-
-### Collection::uksort  
-
-```php
-public uksort (void)
-```
-
-**Description**
-
- 
-
- 
-
-**Parameters**
-
-`This function has no parameters.`
-
-**Return Values**
-
-
-
-
-### Collection::unserialize  
-
-```php
-public unserialize (void)
-```
-
-**Description**
-
- 
-
- 
-
-**Parameters**
-
-`This function has no parameters.`
-
-**Return Values**
-
-
-
-
-### Collection::valid  
-
-```php
-public valid (void)
-```
-
-**Description**
-
- 
-
- 
-
-**Parameters**
-
-`This function has no parameters.`
-
-**Return Values**
-
-
-
-
 ### Collection::walk  
+
+**Description**
 
 ```php
 public walk (\Closure $callback)
 ```
-
-**Description**
 
 Apply a user supplied function to every member of an Collection 
 
@@ -1288,7 +788,7 @@ Apply a user supplied function to every member of an Collection
 
 **Parameters**
 
-`(\Closure) $callback`
+* `(\Closure) $callback`
 : user supplied function  
 
 **Return Values**

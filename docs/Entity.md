@@ -2,6 +2,10 @@
 
 Entity object that extends stdClass constructor to allow passing traversable data to pupulate object properties
 
+
+
+
+
 ## Methods
 
 | Name | Description |
@@ -9,13 +13,15 @@ Entity object that extends stdClass constructor to allow passing traversable dat
 |[__construct](#entity__construct)|__construct|
 
 
+
+
 ### Entity::__construct  
+
+**Description**
 
 ```php
 final public __construct (mixed $data)
 ```
-
-**Description**
 
 __construct 
 
@@ -23,7 +29,7 @@ __construct
 
 **Parameters**
 
-`(mixed) $data`
+* `(mixed) $data`
 : Traversable data (array,stdClass,ArrayIterator)  
 
 **Return Values**

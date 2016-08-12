@@ -6,7 +6,7 @@
     "license": "MIT",
     "require-dev": {
         "phpunit/phpunit": "4.2.*",
-        "clean/phpdoc-md": "0.*",
+        "clean/phpdoc-md": "0.9.0",
         "codeclimate/php-test-reporter": "dev-master"
 
     },
