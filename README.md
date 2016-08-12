@@ -14,3 +14,8 @@ Set of classes for holding data (entity, collection)
 * Collection extends PHP ArrayIterator funtionallity
 
 Check out [documentation](docs/README.md) for more details.
+
+## Clean\Data and Clean\Repository
+
+Clean\Data is independent package but it has been created specially for Clean\Repository needs as it really simplify the way of creating entity models.
+Please take a look at [Chinook Database Repository Example](https://github.com/clean/repository/tree/master/example/chinook) example code base.
