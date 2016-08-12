@@ -27,9 +27,11 @@ class TestCase extends \PHPUnit_Framework_TestCase
             new Entity(['id'=>17]),
         ]);
 
-        $value1 = $collection->getRandom();
-        $value2 = $collection->getRandom();
+        $v1 = $collection->getRandom();
+        $v2 = $collection->getRandom();
+        $v3 = $collection->getRandom();
+        $v4 = $collection->getRandom();
 
-        $this->assertNotEquals($value1, $value2);
+        $this->assertFalse($v1 == $v2 && v2 == $v3 && v3 == $v4);
     }
 }
