@@ -168,7 +168,7 @@ Bind two collections
 
 **Return Values**
 
-`\Collection`
+`static`
 
 
 
@@ -192,7 +192,7 @@ Splits collection into chunks
 
 **Return Values**
 
-`\Collection`
+`static`
 
 
 
@@ -216,7 +216,7 @@ Remove all entities form collection
 
 **Return Values**
 
-`\Collection`
+`static`
 
 
 
@@ -241,7 +241,7 @@ Eliminates entities that contains the same value in given property
 
 **Return Values**
 
-`\Collection`
+`static`
 
 
 
@@ -266,7 +266,7 @@ Filter collection from entities not matching criteria given in callback
 
 **Return Values**
 
-`\Collection`
+`static`
 
 
 
@@ -343,7 +343,7 @@ $colleciton->getBy(function($entity) {
 
 **Return Values**
 
-`\Collection`
+`static`
 
 
 
@@ -391,7 +391,7 @@ Returns new instance of collection of the same type
 
 **Return Values**
 
-`\Collection`
+`static`
 
 
 
@@ -586,7 +586,7 @@ Prepand entity to the begining of collection
 
 **Return Values**
 
-`\Collection`
+`static`
 
 
 
@@ -610,7 +610,7 @@ Renumber collection keys (from zero to n), keeping values in the same place
 
 **Return Values**
 
-`\Collection`
+`static`
 
 
 
@@ -634,7 +634,7 @@ Return an collection with elements in reverse order
 
 **Return Values**
 
-`\Collection`
+`static`
 
 
 
@@ -712,7 +712,7 @@ Extract a slice of the collection
 
 **Return Values**
 
-`\Collection`
+`static`
 
 
 
@@ -744,7 +744,7 @@ $splitted[3]->count(); // = 2
 
 **Return Values**
 
-`\Collection`
+`static`
 
 
 
@@ -793,7 +793,7 @@ Apply a user supplied function to every member of an Collection
 
 **Return Values**
 
-`\Collection`
+`static`
 
 
 
