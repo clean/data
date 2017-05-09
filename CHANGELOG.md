@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.3
+
+- bugfix: invalid return type annotation in Collection methods
+
 ## 2.2.2
 
 - bugfix: Collection::getElementMovedByOffset is not throwing exception for non-numeric (indexed) collection
