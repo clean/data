@@ -23,7 +23,7 @@ class Collection extends \ArrayIterator
     /**
      * Returns new instance of collection of the same type
      *
-     * @return Collection
+     * @return static
      */
     public function getNewCollection()
     {
@@ -37,7 +37,7 @@ class Collection extends \ArrayIterator
      * @param Entity|Collection|Traversable|array $data entity or list of entities to append
      * @access public
      *
-     * @return Collection
+     * @return static
      */
     public function append($data)
     {
@@ -59,7 +59,7 @@ class Collection extends \ArrayIterator
      *
      * @param Entity $entity
      *
-     * @return Collection
+     * @return static
      */
     public function prepend($entity)
     {
@@ -284,7 +284,7 @@ class Collection extends \ArrayIterator
      *
      * @param \Closure $callback callback
      *
-     * @return Collection
+     * @return static
      */
     public function filter(\Closure $callback)
     {
@@ -308,7 +308,7 @@ class Collection extends \ArrayIterator
      * });
      *
      * @param Closure $callback
-     * @return Collection
+     * @return static
      */
     public function getBy(\Closure $callback)
     {
@@ -341,7 +341,7 @@ class Collection extends \ArrayIterator
      *
      * @param integer $size
      *
-     * @return Collection
+     * @return static
      */
     public function chunk($size)
     {
@@ -365,7 +365,7 @@ class Collection extends \ArrayIterator
      * @param integer $offset
      * @param integer|null $length
      *
-     * @return Collection
+     * @return static
      */
     public function slice($offset, $length = null)
     {
@@ -399,7 +399,7 @@ class Collection extends \ArrayIterator
      * 
      * @param integer $parts
      * 
-     * @return Collection
+     * @return static
      */
     public function split($parts)
     {
@@ -411,7 +411,7 @@ class Collection extends \ArrayIterator
     /**
      * Remove all entities form collection
      *
-     * @return Collection
+     * @return static
      */
     public function clear()
     {
@@ -424,7 +424,7 @@ class Collection extends \ArrayIterator
      *
      * @param string|array $index Offsets to remove
      *
-     * @return Collection
+     * @return static
      */
     public function offsetUnset($index)
     {
@@ -451,7 +451,7 @@ class Collection extends \ArrayIterator
 
     /**
      * Renumber collection keys (from zero to n), keeping values in the same place
-     * @return Collection
+     * @return static
      */
     public function reindex()
     {
@@ -472,7 +472,7 @@ class Collection extends \ArrayIterator
      *
      * @param string $propertyName Name of the property
      *
-     * @return Collection
+     * @return static
      */
     public function distinctOn($propertyName)
     {
@@ -492,7 +492,7 @@ class Collection extends \ArrayIterator
     /**
      * Return an collection with elements in reverse order
      *
-     * @return Collection
+     * @return static
      */
     public function reverse()
     {
@@ -511,7 +511,7 @@ class Collection extends \ArrayIterator
      *
      * @param Closure $callback user supplied function
      *
-     * @return Collection
+     * @return static
      */
     public function walk(Closure $callback)
     {
@@ -555,7 +555,7 @@ class Collection extends \ArrayIterator
      * @param array $compareKeys The name of the key to compare with from target Collection
      * @param string $propertyName The nae of new property that will be created in source Collection
      *
-     * @return Collection
+     * @return static
      */
     public function bindCollection(Collection $collection, array $compareKeys, $propertyName)
     {
@@ -587,7 +587,7 @@ class Collection extends \ArrayIterator
      *
      * @param string $name Property name to group by
      *
-     * @return Collection
+     * @return static
      */
     private function groupByField($name)
     {
