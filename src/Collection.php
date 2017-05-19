@@ -32,6 +32,22 @@ class Collection extends \ArrayIterator
     }
 
     /**
+     * Extend collection with entities from another one
+     *
+     * @param Collection $data
+     * @access public
+     *
+     * @return static
+     */
+    public function extend(Collection $collection)
+    {
+        foreach ($collection as $entity) {
+            $this->append($entity);
+        }
+        return $this;
+    }
+
+    /**
      * Append entities to collection
      *
      * @param Entity|Collection|Traversable|array $data entity or list of entities to append
