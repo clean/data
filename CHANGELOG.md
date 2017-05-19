@@ -2,7 +2,7 @@
 
 ## 2.3.0
 
-- feature: add extend method to Collection
+- feature: Collection class has new method 'extend' that allow to concatenate two collections
 
 ## 2.2.3
 
