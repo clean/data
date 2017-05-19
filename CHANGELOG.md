@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.0
+
+- feature: Collection class has new method 'extend' that allow to concatenate two collections
+
 ## 2.2.3
 
 - bugfix: invalid return type annotation in Collection methods
