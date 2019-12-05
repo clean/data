@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.0
+
+- feature: add extend method to Collection
+
 ## 2.2.3
 
 - bugfix: invalid return type annotation in Collection methods
