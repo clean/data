@@ -20,6 +20,7 @@ ArrayIterator
 |[chunk](#collectionchunk)|Splits collection into chunks|
 |[clear](#collectionclear)|Remove all entities form collection|
 |[distinctOn](#collectiondistincton)|Eliminates entities that contains the same value in given property|
+|[extend](#collectionextend)|Extend collection with entities from another one|
 |[filter](#collectionfilter)|Filter collection from entities not matching criteria given in callback|
 |[first](#collectionfirst)|Returns first entity from collection|
 |[getAllValuesForProperty](#collectiongetallvaluesforproperty)|Return values from all entities from given property|
@@ -47,30 +48,30 @@ ArrayIterator
 
 | Name | Description |
 |------|-------------|
-|__construct|-|
-|append|-|
-|asort|-|
-|count|-|
-|current|-|
-|getArrayCopy|-|
-|getFlags|-|
-|key|-|
-|ksort|-|
-|natcasesort|-|
-|natsort|-|
-|next|-|
-|offsetExists|-|
-|offsetGet|-|
-|offsetSet|-|
-|offsetUnset|-|
-|rewind|-|
-|seek|-|
-|serialize|-|
-|setFlags|-|
-|uasort|-|
-|uksort|-|
-|unserialize|-|
-|valid|-|
+| [__construct](https://secure.php.net/manual/en/arrayiterator.__construct.php) | Construct an ArrayIterator |
+| [append](https://secure.php.net/manual/en/arrayiterator.append.php) | Append an element |
+| [asort](https://secure.php.net/manual/en/arrayiterator.asort.php) | Sort array by values |
+| [count](https://secure.php.net/manual/en/arrayiterator.count.php) | Count elements |
+| [current](https://secure.php.net/manual/en/arrayiterator.current.php) | Return current array entry |
+| [getArrayCopy](https://secure.php.net/manual/en/arrayiterator.getarraycopy.php) | Get array copy |
+| [getFlags](https://secure.php.net/manual/en/arrayiterator.getflags.php) | Get flags |
+| [key](https://secure.php.net/manual/en/arrayiterator.key.php) | Return current array key |
+| [ksort](https://secure.php.net/manual/en/arrayiterator.ksort.php) | Sort array by keys |
+| [natcasesort](https://secure.php.net/manual/en/arrayiterator.natcasesort.php) | Sort an array naturally, case insensitive |
+| [natsort](https://secure.php.net/manual/en/arrayiterator.natsort.php) | Sort an array naturally |
+| [next](https://secure.php.net/manual/en/arrayiterator.next.php) | Move to next entry |
+| [offsetExists](https://secure.php.net/manual/en/arrayiterator.offsetexists.php) | Check if offset exists |
+| [offsetGet](https://secure.php.net/manual/en/arrayiterator.offsetget.php) | Get value for an offset |
+| [offsetSet](https://secure.php.net/manual/en/arrayiterator.offsetset.php) | Set value for an offset |
+| [offsetUnset](https://secure.php.net/manual/en/arrayiterator.offsetunset.php) | Unset value for an offset |
+| [rewind](https://secure.php.net/manual/en/arrayiterator.rewind.php) | Rewind array back to the start |
+| [seek](https://secure.php.net/manual/en/arrayiterator.seek.php) | Seek to position |
+| [serialize](https://secure.php.net/manual/en/arrayiterator.serialize.php) | Serialize |
+| [setFlags](https://secure.php.net/manual/en/arrayiterator.setflags.php) | Set behaviour flags |
+| [uasort](https://secure.php.net/manual/en/arrayiterator.uasort.php) | Sort with a user-defined comparison function and maintain index association |
+| [uksort](https://secure.php.net/manual/en/arrayiterator.uksort.php) | Sort by keys using a user-defined comparison function |
+| [unserialize](https://secure.php.net/manual/en/arrayiterator.unserialize.php) | Unserialize |
+| [valid](https://secure.php.net/manual/en/arrayiterator.valid.php) | Check whether array contains more entries |
 
 
 
@@ -79,7 +80,7 @@ ArrayIterator
 **Description**
 
 ```php
-public __call (void)
+ __call (void)
 ```
 
  
@@ -92,7 +93,10 @@ public __call (void)
 
 **Return Values**
 
+`void`
 
+
+<hr />
 
 
 ### Collection::__get  
@@ -119,6 +123,14 @@ Returns direct value from entity when collection has only one element
 
 
 
+**Throws Exceptions**
+
+
+`\LogicException`
+> when collection has more then one element
+
+<hr />
+
 
 ### Collection::__isset  
 
@@ -143,6 +155,14 @@ Returns isset on entity property when collection has only one element
 
 
 
+
+**Throws Exceptions**
+
+
+`\LogicException`
+> when collection has more then one element
+
+<hr />
 
 
 ### Collection::bindCollection  
@@ -173,13 +193,15 @@ Bind two collections
 
 
 
+<hr />
+
 
 ### Collection::chunk  
 
 **Description**
 
 ```php
-public chunk (integer $size)
+public chunk (int $size)
 ```
 
 Splits collection into chunks 
@@ -188,7 +210,7 @@ Splits collection into chunks
 
 **Parameters**
 
-* `(integer) $size`
+* `(int) $size`
 
 **Return Values**
 
@@ -196,6 +218,8 @@ Splits collection into chunks
 
 
 
+
+<hr />
 
 
 ### Collection::clear  
@@ -220,6 +244,8 @@ Remove all entities form collection
 
 
 
+
+<hr />
 
 
 ### Collection::distinctOn  
@@ -246,6 +272,34 @@ Eliminates entities that contains the same value in given property
 
 
 
+<hr />
+
+
+### Collection::extend  
+
+**Description**
+
+```php
+public extend (\Collection $data)
+```
+
+Extend collection with entities from another one 
+
+ 
+
+**Parameters**
+
+* `(\Collection) $data`
+
+**Return Values**
+
+`static`
+
+
+
+
+<hr />
+
 
 ### Collection::filter  
 
@@ -271,6 +325,8 @@ Filter collection from entities not matching criteria given in callback
 
 
 
+<hr />
+
 
 ### Collection::first  
 
@@ -294,6 +350,8 @@ Returns first entity from collection
 
 
 
+
+<hr />
 
 
 ### Collection::getAllValuesForProperty  
@@ -319,6 +377,8 @@ Return values from all entities from given property
 
 
 
+
+<hr />
 
 
 ### Collection::getBy  
@@ -348,6 +408,8 @@ $colleciton->getBy(function($entity) {
 
 
 
+<hr />
+
 
 ### Collection::getKeys  
 
@@ -371,6 +433,8 @@ Returns collection keys
 
 
 
+
+<hr />
 
 
 ### Collection::getNewCollection  
@@ -396,6 +460,8 @@ Returns new instance of collection of the same type
 
 
 
+<hr />
+
 
 ### Collection::getNext  
 
@@ -419,6 +485,8 @@ Returns next entity from collection
 
 
 
+
+<hr />
 
 
 ### Collection::getPrevious  
@@ -444,6 +512,8 @@ Returns previous entity from collection
 
 
 
+<hr />
+
 
 ### Collection::getRandom  
 
@@ -467,6 +537,8 @@ returns random entity from collection
 
 
 
+
+<hr />
 
 
 ### Collection::has  
@@ -495,6 +567,8 @@ Checks if collection has entity with field equals to given value
 
 
 
+<hr />
+
 
 ### Collection::isEmpty  
 
@@ -518,6 +592,8 @@ Returns true if collection is empty
 
 
 
+
+<hr />
 
 
 ### Collection::isNotEmpty  
@@ -543,6 +619,8 @@ Returns true if collection is not empty
 
 
 
+<hr />
+
 
 ### Collection::last  
 
@@ -566,6 +644,8 @@ Returns last entity from collection
 
 
 
+
+<hr />
 
 
 ### Collection::prepend  
@@ -591,6 +671,8 @@ Prepand entity to the begining of collection
 
 
 
+<hr />
+
 
 ### Collection::reindex  
 
@@ -614,6 +696,8 @@ Renumber collection keys (from zero to n), keeping values in the same place
 
 
 
+
+<hr />
 
 
 ### Collection::reverse  
@@ -639,6 +723,8 @@ Return an collection with elements in reverse order
 
 
 
+<hr />
+
 
 ### Collection::search  
 
@@ -663,10 +749,12 @@ Search for an element with given property and value
 
 **Return Values**
 
-`integer|string|false`
+`int|string|bool`
 
 
 
+
+<hr />
 
 
 ### Collection::shift  
@@ -692,13 +780,15 @@ Shift an entity off the begining of collection
 
 
 
+<hr />
+
 
 ### Collection::slice  
 
 **Description**
 
 ```php
-public slice (integer $offset, integer|null $length)
+public slice (int $offset, int|null $length)
 ```
 
 Extract a slice of the collection 
@@ -707,8 +797,8 @@ Extract a slice of the collection
 
 **Parameters**
 
-* `(integer) $offset`
-* `(integer|null) $length`
+* `(int) $offset`
+* `(int|null) $length`
 
 **Return Values**
 
@@ -717,13 +807,15 @@ Extract a slice of the collection
 
 
 
+<hr />
+
 
 ### Collection::split  
 
 **Description**
 
 ```php
-public split (integer $parts)
+public split (int $parts)
 ```
 
 Returns collection of collections created by spliting first Collection to a parts 
@@ -740,7 +832,7 @@ $splitted[3]->count(); // = 2
 
 **Parameters**
 
-* `(integer) $parts`
+* `(int) $parts`
 
 **Return Values**
 
@@ -748,6 +840,8 @@ $splitted[3]->count(); // = 2
 
 
 
+
+<hr />
 
 
 ### Collection::toArray  
@@ -773,6 +867,8 @@ Tranform collection to array
 
 
 
+<hr />
+
 
 ### Collection::walk  
 
@@ -797,4 +893,6 @@ Apply a user supplied function to every member of an Collection
 
 
 
+
+<hr />
 

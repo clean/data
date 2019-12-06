@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.1
+
+- update documentation and project dependecies
+
 ## 2.3.0
 
 - feature: Collection class has new method 'extend' that allow to concatenate two collections

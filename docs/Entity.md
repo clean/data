@@ -34,5 +34,8 @@ __construct
 
 **Return Values**
 
+`void`
 
+
+<hr />
 

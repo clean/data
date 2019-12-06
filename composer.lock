@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7560568eec644b3142d13a1142612dde",
+    "content-hash": "6a150c7b221942745bc7863417f7d768",
     "packages": [],
     "packages-dev": [
         {
             "name": "clean/phpatlas",
-            "version": "dev-master",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/clean/phpatlas.git",
-                "reference": "d42bf23d0478c59accb03d469ed8fb7069383bfc"
+                "reference": "4e74a8e646b289768e77500127389acf69bbeb71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/clean/phpatlas/zipball/d42bf23d0478c59accb03d469ed8fb7069383bfc",
-                "reference": "d42bf23d0478c59accb03d469ed8fb7069383bfc",
+                "url": "https://api.github.com/repos/clean/phpatlas/zipball/4e74a8e646b289768e77500127389acf69bbeb71",
+                "reference": "4e74a8e646b289768e77500127389acf69bbeb71",
                 "shasum": ""
             },
             "require-dev": {
@@ -34,26 +34,26 @@
             "license": [
                 "MIT"
             ],
-            "time": "2019-12-05T22:20:15+00:00"
+            "time": "2019-12-06T08:40:56+00:00"
         },
         {
             "name": "clean/phpdoc-md",
-            "version": "dev-master",
+            "version": "0.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/clean/phpdoc-md.git",
-                "reference": "d14fd2d31763a5b8f0f263e15aec280e86cf145a"
+                "reference": "04643ca722e0e52de57743c19f9ee62856a3fee7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/clean/phpdoc-md/zipball/d14fd2d31763a5b8f0f263e15aec280e86cf145a",
-                "reference": "d14fd2d31763a5b8f0f263e15aec280e86cf145a",
+                "url": "https://api.github.com/repos/clean/phpdoc-md/zipball/04643ca722e0e52de57743c19f9ee62856a3fee7",
+                "reference": "04643ca722e0e52de57743c19f9ee62856a3fee7",
                 "shasum": ""
             },
             "require": {
-                "clean/phpatlas": "dev-master",
+                "clean/phpatlas": "0.2.0",
                 "clean/view": "0.1.0",
-                "phpdocumentor/reflection-docblock": "^3.0.2|^4.0"
+                "phpdocumentor/reflection-docblock": "^3|^4"
             },
             "require-dev": {
                 "clean/mpr": "dev-master",
@@ -81,7 +81,7 @@
                 "markdown",
                 "phpdoc"
             ],
-            "time": "2019-12-05T23:08:40+00:00"
+            "time": "2019-12-06T08:55:33+00:00"
         },
         {
             "name": "clean/view",
@@ -2533,7 +2533,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "clean/phpdoc-md": 20,
         "codeclimate/php-test-reporter": 20
     },
     "prefer-stable": true,
